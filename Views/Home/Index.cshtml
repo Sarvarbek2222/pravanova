@@ -1,0 +1,257 @@
+@model HomeModel
+@{
+    ViewData["TitleKey"] = "home.pageTitle";
+    ViewData["Title"] = L["home.pageTitle"];
+    var me = Model.Me;
+    if (me != null) { ViewData["ActiveMistakes"] = me.ActiveMistakes; }
+    var name = me == null ? "" : (string.IsNullOrWhiteSpace(me.User.FullName) ? me.User.Username : me.User.FullName.Split(' ', StringSplitOptions.RemoveEmptyEntries)[0]);
+
+    // Mashq testlari: (controller, savollar soni, daraja kaliti, rang, daraja)
+    var practice = new[]
+    {
+        ("Testforty", 20, "hm.lvl1", "#10b981", 1),
+        ("Testsixty", 40, "hm.lvl2", "#06b6d4", 2),
+        ("Testeighty", 80, "hm.lvl3", "#4f46e5", 3),
+        ("Testhundred", 100, "hm.lvl4", "#8b5cf6", 4),
+        ("Testhundredsixty", 200, "hm.lvl5", "#e11d48", 5),
+    };
+}
+
+<section class="nv-hero">
+    <div>
+        <span class="nv-hero-tag"><i></i><span>@L.F("nv.heroTag", ("q", Model.BankSize), ("b", Model.BiletCount))</span></span>
+        <h1>
+            @if (me != null)
+            {
+                <span style="display:block;font-size:.5em;color:#e0e7ff;-webkit-text-fill-color:#e0e7ff;margin-bottom:6px;">@L.F("cab.hello", ("name", name))</span>
+            }
+            @Html.Raw(L["nv.heroTitle"])
+        </h1>
+        <p data-i18n="nv.heroText">@L["nv.heroText"]</p>
+        <div class="nv-hero-cta">
+            <a class="ca-btn nv-btn-white" asp-controller="Test" asp-action="Index">@Icons.Play <span data-i18n="hm.examStart">@L["hm.examStart"]</span></a>
+            <a class="ca-btn nv-btn-glass" asp-controller="Bilet" asp-action="Index">@Icons.Layers <span data-i18n="nv.toBilets">@L["nv.toBilets"]</span></a>
+        </div>
+        <div class="nv-hero-stats">
+            <div><b>@Model.BankSize</b><span data-i18n="hm.statQuestions">@L["hm.statQuestions"]</span></div>
+            <div><b>@Model.BiletCount</b><span data-i18n="hm.statBilets">@L["hm.statBilets"]</span></div>
+            <div><b>@Model.TopicCount</b><span data-i18n="hm.statTopics">@L["hm.statTopics"]</span></div>
+        </div>
+    </div>
+    <div class="nv-hero-art" aria-hidden="true">
+        <img src="~/images/avprsm1 rrr.png" alt="" decoding="async" />
+        <span class="nv-float f1">@Icons.Ok <span data-i18n="nv.float1">@L["nv.float1"]</span></span>
+        <span class="nv-float f2">@Icons.Timer <span data-i18n="nv.float2">@L["nv.float2"]</span></span>
+    </div>
+</section>
+
+<form class="nv-search" id="hmSearch" action="/Cabinet/Search" method="get" role="search" autocomplete="off">
+    <h2 class="nv-sr" data-i18n="sq.title">@L["sq.title"]</h2>
+    <label class="nv-search-field">
+        @Icons.Search
+        <input type="search" name="q" id="hmQ" class="nv-search-input" maxlength="200" spellcheck="false" data-search-focus
+               placeholder="@L["hm.searchPlaceholder"]" data-i18n-placeholder="hm.searchPlaceholder"
+               aria-label="@L["sq.title"]" aria-autocomplete="list" aria-controls="hmSuggest" aria-expanded="false" />
+    </label>
+    <button type="submit" class="nv-search-btn" data-i18n="hm.searchBtn">@L["hm.searchBtn"]</button>
+    <div class="nv-suggest" id="hmSuggest" role="listbox" hidden></div>
+</form>
+
+@if (me != null)
+{
+    <div class="nv-me">
+        <a asp-controller="Cabinet" asp-action="Analysis">
+            <span class="ca-kpi-icon brand">@Icons.Target</span>
+            <span><b>@me.ReadinessScore%</b><span data-i18n="cab.readiness">@L["cab.readiness"]</span></span>
+        </a>
+        <a asp-controller="Cabinet" asp-action="Analysis">
+            <span class="ca-kpi-icon warn">@Icons.Flame</span>
+            <span><b>@me.StreakDays</b><span data-i18n="cab.streak">@L["cab.streak"]</span></span>
+        </a>
+        <a asp-controller="Cabinet" asp-action="Mistakes">
+            <span class="ca-kpi-icon bad">@Icons.Alert</span>
+            <span><b>@me.ActiveMistakes</b><span data-i18n="cab.activeMistakes">@L["cab.activeMistakes"]</span></span>
+        </a>
+        <a asp-controller="Cabinet" asp-action="Results">
+            <span class="ca-kpi-icon ok">@Icons.Ok</span>
+            <span><b>@me.Extra.Today</b><span data-i18n="nv.todayAnswers">@L["nv.todayAnswers"]</span></span>
+        </a>
+    </div>
+}
+
+<div class="nv-sec-title">
+    <div>
+        <h2 data-i18n="nv.modesTitle">@L["nv.modesTitle"]</h2>
+        <p data-i18n="nv.modesSub">@L["nv.modesSub"]</p>
+    </div>
+</div>
+<div class="nv-modes">
+    <a class="nv-mode exam" asp-controller="Test" asp-action="Index">
+        <span class="nv-mode-ic">@Icons.Trophy</span>
+        <h3 data-i18n="nav.real">@L["nav.real"]</h3>
+        <p data-i18n="hm.examDesc">@L["hm.examDesc"]</p>
+        <div class="nv-chip-row">
+            <span class="nv-mini-chip" data-i18n="hm.examFact1">@L["hm.examFact1"]</span>
+            <span class="nv-mini-chip" data-i18n="nv.fact25">@L["nv.fact25"]</span>
+            <span class="nv-mini-chip" data-i18n="nv.fact2err">@L["nv.fact2err"]</span>
+        </div>
+        <div class="nv-mode-foot"><span class="nv-mode-num">20<small data-i18n="hm.questions">@L["hm.questions"]</small></span><span class="nv-go">@Icons.ArrowRight</span></div>
+    </a>
+    <a class="nv-mode" style="--acc:#0ea5e9" asp-controller="Bilet" asp-action="Index">
+        <span class="nv-mode-ic">@Icons.Layers</span>
+        <h3 data-i18n="nav.bilets">@L["nav.bilets"]</h3>
+        <p>@L.F("hm.biletsDesc", ("n", Model.BiletCount))</p>
+        <div class="nv-mode-foot"><span class="nv-mode-num">@Model.BiletCount<small data-i18n="hm.statBilets">@L["hm.statBilets"]</small></span><span class="nv-go">@Icons.ArrowRight</span></div>
+    </a>
+    <a class="nv-mode" style="--acc:#8b5cf6" asp-controller="Topic" asp-action="Index">
+        <span class="nv-mode-ic">@Icons.Book</span>
+        <h3 data-i18n="nav.topics">@L["nav.topics"]</h3>
+        <p>@L.F("hm.topicsDesc", ("n", Model.TopicCount))</p>
+        <div class="nv-mode-foot"><span class="nv-mode-num">@Model.TopicCount<small data-i18n="hm.statTopics">@L["hm.statTopics"]</small></span><span class="nv-go">@Icons.ArrowRight</span></div>
+    </a>
+    <a class="nv-mode" style="--acc:#f59e0b" asp-controller="TestAll" asp-action="Index">
+        <span class="nv-mode-ic">@Icons.Flame</span>
+        <h3 data-i18n="nav.marathon">@L["nav.marathon"]</h3>
+        <p>@L.F("hm.marathonDesc", ("n", Model.BankSize))</p>
+        <div class="nv-mode-foot"><span class="nv-mode-num">@Model.BankSize<small data-i18n="hm.statQuestions">@L["hm.statQuestions"]</small></span><span class="nv-go">@Icons.ArrowRight</span></div>
+    </a>
+    @if (me != null)
+    {
+        <a class="nv-mode" style="--acc:#f43f5e" href="@(me.ActiveMistakes > 0 ? "/Cabinet/Practice" : "/Cabinet/Mistakes")">
+            <span class="nv-mode-ic">@Icons.Repeat</span>
+            <h3 data-i18n="cab.fixMistakes">@L["cab.fixMistakes"]</h3>
+            <p data-i18n="cab.mistakesSub">@L["cab.mistakesSub"]</p>
+            <div class="nv-mode-foot"><span class="nv-mode-num">@me.ActiveMistakes<small data-i18n="cab.activeMistakes">@L["cab.activeMistakes"]</small></span><span class="nv-go">@Icons.ArrowRight</span></div>
+        </a>
+    }
+</div>
+
+<div class="nv-sec-title">
+    <div>
+        <h2 data-i18n="hm.practiceTitle">@L["hm.practiceTitle"]</h2>
+        <p data-i18n="hm.practiceSub">@L["hm.practiceSub"]</p>
+    </div>
+</div>
+<div class="nv-levels">
+    @foreach (var (ctrl, n, lvl, color, level) in practice)
+    {
+        <a class="nv-level" asp-controller="@ctrl" asp-action="Index" style="--acc:@color" aria-label="@n @L["hm.questions"]">
+            <span class="nv-go">@Icons.ArrowRight</span>
+            <span class="nv-level-num">@n</span>
+            <span class="nv-level-unit" data-i18n="hm.questions">@L["hm.questions"]</span>
+            <span class="nv-dots" aria-hidden="true">@for (int b = 1; b <= 5; b++) { <i class="@(b <= level ? "on" : "")"></i> }</span>
+            <span class="nv-level-lvl" data-i18n="@lvl">@L[lvl]</span>
+        </a>
+    }
+</div>
+
+@if (Model.TopTopics.Count > 0)
+{
+    <div class="nv-sec-title">
+        <div>
+            <h2 data-i18n="hm.popularTopics">@L["hm.popularTopics"]</h2>
+            <p data-i18n="hm.topicsHint">@L["hm.topicsHint"]</p>
+        </div>
+        <a class="ca-link" asp-controller="Topic" asp-action="Index" data-i18n="hm.allTopics">@L["hm.allTopics"]</a>
+    </div>
+    <div class="nv-topic-chips">
+        @foreach (var (topic, count) in Model.TopTopics)
+        {
+            <a class="nv-tchip" href="/Topic/Test?topic=@Uri.EscapeDataString(topic)" title="@L.Topic(topic)">
+                <span data-i18n-pick data-uz="@Topics.Display(topic, Lang.Uz)" data-ru="@Topics.Display(topic, Lang.Ru)" data-uzk="@topic">@L.Topic(topic)</span><b>@count</b>
+            </a>
+        }
+    </div>
+}
+
+@section Scripts {
+<script>
+    (function () {
+        "use strict";
+        // Savol qidirish: yozish davomida eng mos 6 ta savol; Enter — barcha natijalar sahifasi
+        var form = document.getElementById("hmSearch"), input = document.getElementById("hmQ"), box = document.getElementById("hmSuggest");
+        var timer = null, seq = 0, active = -1;
+        var ICON_IMG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>';
+
+        function esc(s) {
+            return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+                return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+            });
+        }
+        function tokens(q) {
+            var base = q.toLowerCase().replace(/['`´‘’ʻʼ]/g, "").split(/[^\p{L}\p{N}]+/u).filter(function (t) { return t.length >= 2; });
+            var res = base.slice();
+            base.forEach(function (t) { var c = I18n.toCyrillic ? I18n.toCyrillic(t).toLowerCase() : t; if (c && res.indexOf(c) < 0) res.push(c); });
+            return res.sort(function (a, b) { return b.length - a.length; });
+        }
+        function highlight(text, toks) {
+            text = String(text == null ? "" : text);
+            if (!toks.length) return esc(text);
+            var re;
+            try {
+                re = new RegExp(toks.map(function (t) {
+                    return Array.from(t).map(function (ch) { return ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("['`´‘’ʻʼ]?");
+                }).join("|"), "giu");
+            } catch (e) { return esc(text); }
+            var out = "", last = 0, m;
+            while ((m = re.exec(text)) !== null) {
+                if (!m[0]) { re.lastIndex++; continue; }
+                out += esc(text.slice(last, m.index)) + "<mark>" + esc(m[0]) + "</mark>";
+                last = m.index + m[0].length;
+            }
+            return out + esc(text.slice(last));
+        }
+        function tooShort(q) { return q.replace(/['`´‘’ʻʼ\s]/g, "").length < 2 && !/^#?\d+$/.test(q); }
+        function close() { box.hidden = true; active = -1; input.setAttribute("aria-expanded", "false"); }
+
+        function suggest() {
+            var q = input.value.trim();
+            if (tooShort(q)) { close(); return; }
+            var my = ++seq;
+            fetch("/Cabinet/SearchQuestions?q=" + encodeURIComponent(q), { headers: { Accept: "application/json" }, cache: "no-store" })
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function (d) {
+                    if (my !== seq || input.value.trim() !== q) return;
+                    var toks = tokens(q), items = (d.items || []).slice(0, 6), html = "";
+                    if (!items.length) html = '<div class="nv-sg-empty">' + esc(I18n.t("sq.emptyTitle")) + "</div>";
+                    items.forEach(function (it) {
+                        var x = it.question;
+                        var thumb = x.imageUrl ? '<img alt="" loading="lazy" src="/uploads/' + encodeURIComponent(x.imageUrl) + '?w=160">' : ICON_IMG;
+                        html += '<a class="nv-sg-item" role="option" href="/Cabinet/Practice?ids=' + x.id + "&q=" + encodeURIComponent(q) + '">' +
+                            '<span class="nv-sg-thumb">' + thumb + "</span>" +
+                            '<span class="nv-sg-text"><span class="nv-sg-num">#' + x.id + "</span>" +
+                            highlight(I18n.pick(x.questionUZ, x.questionRU, x.questionUZK), toks) + "</span></a>";
+                    });
+                    if (d.total > 0) {
+                        html += '<a class="nv-sg-foot" href="/Cabinet/Search?q=' + encodeURIComponent(q) + '"><span>' +
+                            esc(I18n.t("hm.allResults", { n: d.total })) + "</span><span>→</span></a>";
+                    }
+                    box.innerHTML = html;
+                    box.hidden = false;
+                    active = -1;
+                    input.setAttribute("aria-expanded", "true");
+                })
+                .catch(function () { if (my === seq) close(); });
+        }
+
+        input.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(suggest, 200); });
+        input.addEventListener("focus", function () { if (box.innerHTML && !tooShort(input.value.trim())) box.hidden = false; });
+        input.addEventListener("keydown", function (e) {
+            var links = box.hidden ? [] : box.querySelectorAll("a");
+            if (e.key === "Escape") { close(); return; }
+            if (!links.length) return;
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                active = (active + (e.key === "ArrowDown" ? 1 : -1) + links.length) % links.length;
+                links.forEach(function (a, i) { a.classList.toggle("on", i === active); });
+            } else if (e.key === "Enter" && active >= 0) {
+                e.preventDefault();
+                location.href = links[active].href;
+            }
+        });
+        form.addEventListener("submit", function (e) { if (!input.value.trim()) { e.preventDefault(); input.focus(); } });
+        document.addEventListener("click", function (e) { if (!form.contains(e.target)) close(); });
+        window.addEventListener("pageshow", function () { close(); });
+    })();
+</script>
+}

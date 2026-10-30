@@ -1,0 +1,6 @@
+@{
+    Layout = null;
+    var biletNumber = Convert.ToInt32(ViewData["BiletNumber"] ?? 1);
+}
+@* Bilet testi — yagona dvigatel (Views/Shared/_NovaTest.cshtml) *@
+@await Html.PartialAsync("_NovaTest", new NovaTest { Source = "/Bilet/GetBiletQuestions?biletNumber=" + biletNumber, Format = "bilet", Bilet = biletNumber, ExitUrl = "/Bilet/Index" })

@@ -1,0 +1,10 @@
+@{
+    Layout = null;
+    // ids berilgan bo'lsa — "Savol qidirish"dan tanlangan savollar; aks holda — faol xatolar
+    var searchIds = ViewBag.Ids as string;
+    var isSearch = searchIds != null;
+    var backUrl = ViewBag.BackUrl as string ?? "/Cabinet/Mistakes";
+    var source = isSearch ? "/Cabinet/GetQuestionsByIds?ids=" + searchIds : "/Cabinet/GetMistakeQuestions";
+}
+@* Xatolar ustida ishlash / qidiruvdan tanlangan savollar — yagona dvigatel *@
+@await Html.PartialAsync("_NovaTest", new NovaTest { Source = source, ExitUrl = backUrl, ExitKey = isSearch ? "test.backToSearch" : "test.exit" })

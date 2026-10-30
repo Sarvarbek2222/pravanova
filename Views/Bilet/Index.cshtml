@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["TitleKey"] = "bilet.pageTitle";
+    ViewData["Title"] = L["bilet.pageTitle"];
+    var total = (int)(ViewBag.Total ?? 0);
+    var progress = ViewBag.Progress as Dictionary<string, RefProgress> ?? new();
+    int passed = progress.Values.Count(p => p.EverPassed);
+    int tried = progress.Count;
+}
+
+<div class="ca-page-head">
+    <div>
+        <div class="ca-eyebrow" data-i18n="nv.biletsEyebrow">@L["nv.biletsEyebrow"]</div>
+        <h1 class="ca-h1" data-i18n="bilet.list">@L["bilet.list"]</h1>
+        <p class="ca-sub">@L.F("hm.biletsDesc", ("n", total))</p>
+    </div>
+    <div class="ca-card" style="padding:14px 18px;min-width:min(100%,300px);">
+        <div class="ca-factor-top"><span data-i18n="nv.biletsPassed">@L["nv.biletsPassed"]</span><b>@passed / @total</b></div>
+        <div class="ca-bar ok"><i data-w="@(total > 0 ? Math.Round(100.0 * passed / total) : 0)"></i></div>
+    </div>
+</div>
+
+<div class="nv-toolbar">
+    <div class="nv-legend">
+        <span><i style="background:#10b981"></i><span data-i18n="nv.stPassed">@L["nv.stPassed"]</span></span>
+        <span><i style="background:#f59e0b"></i><span data-i18n="nv.stPartial">@L["nv.stPartial"]</span></span>
+        <span><i style="background:#f43f5e"></i><span data-i18n="nv.stFailed">@L["nv.stFailed"]</span></span>
+        <span><i style="background:var(--ca-track)"></i><span data-i18n="nv.stNew">@L["nv.stNew"]</span></span>
+    </div>
+    <span class="ca-muted ca-small">@L.F("nv.biletsTried", ("n", tried))</span>
+</div>
+
+<div class="nv-bilets">
+    @for (int i = 1; i <= total; i++)
+    {
+        progress.TryGetValue(i.ToString(), out var p);
+        <a class="nv-bilet @(p?.Status)" href="/Bilet/TestPage?biletNumber=@i">
+            <span class="nv-bilet-st"></span>
+            <small data-i18n="testType.bilet">@L["testType.bilet"]</small>
+            <b>@i</b>
+            <span class="nv-bilet-bar"><i style="width:@(p == null ? 0 : (int)p.BestPercent)%"></i></span>
+            <span class="nv-bilet-meta">
+                @if (p != null)
+                {
+                    <span>@L.F("nv.best", ("n", Math.Round(p.BestPercent))) · @p.Attempts×</span>
+                }
+                else
+                {
+                    <span data-i18n="nv.stNew">@L["nv.stNew"]</span>
+                }
+            </span>
+        </a>
+    }
+</div>

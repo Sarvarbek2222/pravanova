@@ -1,0 +1,682 @@
+@inject UserService AdminUserSvc
+@{
+    // 🔔 Boshqa qurilmadan kirish so'rovlari soni (bildirishnoma belgisi uchun)
+    var pendingDevices = User.IsInRole(Roles.SuperAdmin) ? await AdminUserSvc.PendingDeviceRequestCountAsync() : 0;
+}
+<!DOCTYPE html>
+<html data-theme="dark" lang="@L.HtmlLang" data-lang="@L.Lang" data-title-key="@ViewData["TitleKey"]" data-title-suffix=" — Admin">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Admin</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
+    <partial name="_I18nScripts" />
+   
+    <style>
+        :root {
+            --bg: #090d1a;
+            --surface: #111930;
+            --surface2: #172040;
+            --sidebar-w: 260px;
+            --border: rgba(255,255,255,0.07);
+            --red: #6366f1;
+            --red-dim: rgba(99,102,241,0.14);
+            --text: #e8eaf0;
+            --muted: #8590b5;
+            --success: #00e676;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ══ SIDEBAR ══ */
+        .adm-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        /* Logo */
+        .adm-logo {
+            padding: 28px 24px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .adm-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--red);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+            .adm-logo-icon svg {
+                width: 18px;
+                height: 18px;
+                color: #fff;
+            }
+
+        .adm-logo-text {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        .adm-logo-sub {
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* Nav */
+        .adm-nav {
+            flex: 1;
+            padding: 20px 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .adm-nav-label {
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 8px 12px 6px;
+            margin-top: 8px;
+        }
+
+        .adm-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 4px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .adm-link:hover {
+                background: rgba(255,255,255,0.04);
+                color: var(--text);
+            }
+
+            .adm-link.active {
+                background: var(--red-dim);
+                color: #fff;
+                border: 1px solid rgba(99,102,241,0.18);
+            }
+
+                .adm-link.active::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 3px;
+                    height: 100%;
+                    background: var(--red);
+                    border-radius: 0 2px 2px 0;
+                }
+
+        .adm-link-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.04);
+            flex-shrink: 0;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .adm-link.active .adm-link-icon {
+            background: var(--red-dim);
+        }
+
+        .adm-link-text {
+            flex: 1;
+        }
+
+        .adm-link-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            background: var(--red-dim);
+            color: var(--red);
+            border: 1px solid rgba(99,102,241,0.2);
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        /* Divider */
+        .adm-nav-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 10px 0;
+        }
+
+        /* Logout */
+        .adm-link.logout {
+            color: rgba(99,102,241,0.7);
+        }
+
+            .adm-link.logout:hover {
+                background: var(--red-dim);
+                color: var(--red);
+            }
+
+        /* Footer of sidebar */
+        .adm-sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .adm-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .adm-user-avatar {
+            width: 34px;
+            height: 34px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .adm-user-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .adm-user-role {
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ══ TOPBAR ══ */
+        .adm-topbar {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-w);
+            right: 0;
+            height: 62px;
+            background: rgba(7,8,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            z-index: 90;
+        }
+
+        .adm-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .adm-breadcrumb-sep {
+            opacity: 0.3;
+        }
+
+        .adm-breadcrumb-current {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .adm-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* 🔔 Qurilma so'rovlari bildirishnomasi */
+        .adm-dev-count {
+            margin-left: auto;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: #f59e0b;
+            color: #111;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .adm-dev-count[hidden] { display: none; }
+        .adm-bell {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            border: 1px solid var(--border);
+            background: var(--surface2);
+            transition: all .2s;
+            flex-shrink: 0;
+        }
+        .adm-bell:hover { color: #fff; border-color: #f59e0b; }
+        .adm-bell svg { width: 18px; height: 18px; }
+        .adm-bell .adm-dev-count { position: absolute; top: -5px; right: -7px; margin: 0; }
+        .adm-bell.ring { color: #fbbf24; border-color: rgba(245,158,11,.5); }
+        .adm-bell.ring svg { animation: adm-ring 2.4s ease-in-out infinite; transform-origin: 50% 10%; }
+        @@keyframes adm-ring {
+            0%, 70%, 100% { transform: rotate(0); }
+            75% { transform: rotate(14deg); }
+            80% { transform: rotate(-12deg); }
+            85% { transform: rotate(8deg); }
+            90% { transform: rotate(-5deg); }
+        }
+        .adm-toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 300;
+            max-width: min(360px, calc(100vw - 40px));
+            background: var(--surface);
+            border: 1px solid rgba(245,158,11,.5);
+            border-left: 4px solid #f59e0b;
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: var(--text);
+            box-shadow: 0 12px 40px rgba(0,0,0,.45);
+            font-size: .88rem;
+            text-decoration: none;
+            display: block;
+        }
+        .adm-toast:hover { color: #fff; }
+        @@media (prefers-reduced-motion: reduce) { .adm-bell.ring svg { animation: none; } }
+
+        .adm-status-dot {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+            .adm-status-dot::before {
+                content: '';
+                width: 7px;
+                height: 7px;
+                background: var(--success);
+                border-radius: 50%;
+                box-shadow: 0 0 8px var(--success);
+                animation: pulse 2s infinite;
+            }
+
+        @@keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.4);
+            }
+        }
+
+        /* hamburger */
+        .adm-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border: none;
+            background: transparent;
+        }
+
+            .adm-hamburger span {
+                display: block;
+                width: 22px;
+                height: 2px;
+                background: var(--text);
+                border-radius: 2px;
+                transition: all 0.3s;
+            }
+
+        /* ══ MAIN CONTENT ══ */
+        .adm-content {
+            margin-left: var(--sidebar-w);
+            padding-top: 62px;
+            min-height: 100vh;
+        }
+
+        /* ══ MOBILE OVERLAY ══ */
+        .adm-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 99;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ══ SCROLLBAR ══ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(255,255,255,0.2);
+            }
+
+        /* ══ RESPONSIVE ══ */
+        @@media (max-width: 900px) {
+            .adm-sidebar {
+                transform: translateX(-100%);
+            }
+
+                .adm-sidebar.open {
+                    transform: translateX(0);
+                }
+
+            .adm-overlay.open {
+                display: block;
+            }
+
+            .adm-topbar {
+                left: 0;
+                padding: 0 20px;
+            }
+
+            .adm-content {
+                margin-left: 0;
+            }
+
+            .adm-hamburger {
+                display: flex;
+            }
+        }
+
+        /* Til tugmalari */
+        .adm-topbar-right { display: flex; align-items: center; gap: 16px; }
+        .adm-lang { display: flex; gap: 4px; }
+        .adm-lang .lang-btn {
+            padding: 3px 9px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--surface2);
+            transition: all 0.2s;
+        }
+        .adm-lang .lang-btn:hover { border-color: rgba(255,255,255,0.3); }
+        .adm-lang .lang-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+        /* Yuqori panel kichik ekranlarda: faqat menyu tugmasi, til va profil */
+        .adm-topbar > div:first-child { min-width: 0; }
+        .adm-breadcrumb { min-width: 0; overflow: hidden; white-space: nowrap; }
+        .adm-breadcrumb-current { overflow: hidden; text-overflow: ellipsis; }
+        @@media (max-width: 900px) {
+            .adm-status-dot { display: none; }
+        }
+        @@media (max-width: 640px) {
+            .adm-topbar { padding: 0 12px; gap: 8px; }
+            .adm-topbar-right { gap: 6px; }
+            .adm-breadcrumb { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OVERLAY -->
+    <div class="adm-overlay" id="overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="adm-sidebar" id="sidebar">
+
+        <div class="adm-logo">
+            <div class="adm-logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+            </div>
+            <div>
+                <div class="adm-logo-text">AVTOPRAVA</div>
+                <div class="adm-logo-sub" data-i18n="admin.panel">@L["admin.panel"]</div>
+            </div>
+        </div>
+
+        <nav class="adm-nav">
+
+            <div class="adm-nav-label" data-i18n="admin.main">@L["admin.main"]</div>
+
+            <a asp-controller="Question" asp-action="Index1" class="adm-link active">
+                <span class="adm-link-icon">📊</span>
+                <span class="adm-link-text" data-i18n="admin.dashboard">@L["admin.dashboard"]</span>
+            </a>
+
+            <a asp-controller="Question" asp-action="Index" class="adm-link">
+                <span class="adm-link-icon">📝</span>
+                <span class="adm-link-text" data-i18n="admin.questions">@L["admin.questions"]</span>
+                <span class="adm-link-badge" data-i18n="admin.new">@L["admin.new"]</span>
+            </a>
+
+            <a asp-controller="Analytics" asp-action="Index" class="adm-link">
+                <span class="adm-link-icon">📈</span>
+                <span class="adm-link-text" data-i18n="admin.analytics">@L["admin.analytics"]</span>
+            </a>
+
+            <a asp-controller="Question" asp-action="Create" class="adm-link">
+                <span class="adm-link-icon">➕</span>
+                <span class="adm-link-text" data-i18n="admin.addQuestion">@L["admin.addQuestion"]</span>
+            </a>
+
+            <div class="adm-nav-divider"></div>
+            <div class="adm-nav-label" data-i18n="admin.system">@L["admin.system"]</div>
+
+            <a asp-controller="Users" asp-action="Index" class="adm-link">
+                <span class="adm-link-icon">👥</span>
+                <span class="adm-link-text" data-i18n="admin.users">@L["admin.users"]</span>
+            </a>
+
+            <a asp-controller="Users" asp-action="Devices" class="adm-link">
+                <span class="adm-link-icon">🔔</span>
+                <span class="adm-link-text" data-i18n="dev.title">@L["dev.title"]</span>
+                <span class="adm-dev-count" data-dev-count @(pendingDevices == 0 ? "hidden" : "")>@pendingDevices</span>
+            </a>
+
+<a asp-controller="Auth" asp-action="Logout" class="adm-link logout">
+                <span class="adm-link-icon">🚪</span>
+                <span class="adm-link-text" data-i18n="admin.logout">@L["admin.logout"]</span>
+            </a>
+
+        </nav>
+
+        <div class="adm-sidebar-footer">
+            <div class="adm-user">
+                <div class="adm-user-avatar">@((User.Identity?.Name ?? "A").Substring(0, 1).ToUpperInvariant())</div>
+                <div>
+                    <div class="adm-user-name">@User.Identity?.Name</div>
+                    <div class="adm-user-role" data-i18n="admin.role">@L["admin.role"]</div>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="adm-topbar">
+        <div style="display:flex; align-items:center; gap:16px;">
+            <button class="adm-hamburger" id="hamburger" aria-label="@L["admin.menu"]">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="adm-breadcrumb">
+                <span data-i18n="admin.admin">@L["admin.admin"]</span>
+                <span class="adm-breadcrumb-sep">/</span>
+                <span class="adm-breadcrumb-current" data-i18n="@ViewData["TitleKey"]">@ViewData["Title"]</span>
+            </div>
+        </div>
+        <div class="adm-topbar-right">
+            <a asp-controller="Users" asp-action="Devices" class="adm-bell @(pendingDevices > 0 ? "ring" : "")" data-dev-bell
+               title="@L["dev.title"]" data-i18n-title="dev.title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+                <span class="adm-dev-count" data-dev-count @(pendingDevices == 0 ? "hidden" : "")>@pendingDevices</span>
+            </a>
+            <partial name="_LangDropdown" />
+            <partial name="_UserMenu" />
+            <div class="adm-status-dot" data-i18n="admin.status">@L["admin.status"]</div>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="adm-content">
+        @RenderBody()
+    </main>
+
+    <script>
+        const sidebar   = document.getElementById("sidebar");
+        const overlay   = document.getElementById("overlay");
+        const hamburger = document.getElementById("hamburger");
+
+        function openSidebar() {
+            sidebar.classList.add("open");
+            overlay.classList.add("open");
+        }
+        function closeSidebar() {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("open");
+        }
+
+        hamburger.addEventListener("click", () => {
+            sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
+        });
+        overlay.addEventListener("click", closeSidebar);
+
+        // Active link — eng aniq mos keladigan bittasi (/Users/Devices da "Foydalanuvchilar" emas)
+        const links = document.querySelectorAll(".adm-link");
+        const path  = window.location.pathname.toLowerCase();
+        let best = null, bestLen = 0;
+        links.forEach(link => {
+            link.classList.remove("active");
+            const linkPath = link.href ? new URL(link.href).pathname.toLowerCase() : "";
+            if (linkPath.length > 1 && (path === linkPath || path.startsWith(linkPath + "/")) && linkPath.length > bestLen) {
+                best = link; bestLen = linkPath.length;
+            }
+        });
+        if (best) best.classList.add("active");
+
+        // 🔔 Yangi qurilma so'rovlarini kuzatish: har 20 soniyada tekshiriladi, yangisi kelsa — xabar chiqadi
+        (function () {
+            let last = @pendingDevices;
+            function show(n) {
+                document.querySelectorAll("[data-dev-count]").forEach(el => { el.textContent = n; el.hidden = n === 0; });
+                document.querySelectorAll("[data-dev-bell]").forEach(el => el.classList.toggle("ring", n > 0));
+                document.title = (n > 0 ? "(" + n + ") " : "") + document.title.replace(/^\(\d+\)\s*/, "");
+            }
+            function toast() {
+                const old = document.querySelector(".adm-toast");
+                if (old) old.remove();
+                const a = document.createElement("a");
+                a.className = "adm-toast";
+                a.href = "@Url.Action("Devices", "Users")";
+                a.setAttribute("role", "status");
+                a.setAttribute("data-i18n", "dev.toast");
+                a.textContent = "🔔 " + I18n.t("dev.toast");
+                document.body.appendChild(a);
+                setTimeout(() => a.remove(), 12000);
+            }
+            async function poll() {
+                if (document.hidden) return;
+                try {
+                    const r = await fetch("@Url.Action("PendingCount", "Users")", { headers: { Accept: "application/json" }, cache: "no-store" });
+                    if (!r.ok) return;
+                    const n = (await r.json()).count | 0;
+                    if (n > last) toast();
+                    last = n;
+                    show(n);
+                } catch (e) { }
+            }
+            show(last);
+            setInterval(poll, 20000);
+            document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(); });
+        })();
+    </script>
+
+    <script src="~/js/ui.js" asp-append-version="true"></script>
+</body>
+</html>

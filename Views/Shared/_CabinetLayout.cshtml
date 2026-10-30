@@ -1,0 +1,7 @@
+﻿@* Kabinet sahifalari umumiy ilova qobig'ida (_Layout) ko'rsatiladi *@
+@{
+    Layout = "_Layout";
+}
+@RenderBody()
+@section Head { @await RenderSectionAsync("Head", required: false) }
+@section Scripts { @await RenderSectionAsync("Scripts", required: false) }

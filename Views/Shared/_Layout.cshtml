@@ -1,0 +1,119 @@
+﻿@* AvtoPrava Nova — ilova qobig'i: chapda menyu (planshet/telefonda chiqib keladi), yuqorida panel, telefonda pastki menyu.
+   Bosh sahifa, biletlar, mavzular va kabinet sahifalari shu qobiqda. *@
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    bool Is(string c, params string[] actions) =>
+        string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) &&
+        (actions.Length == 0 || actions.Contains(action, StringComparer.OrdinalIgnoreCase));
+    string Active(bool on) => on ? "active" : "";
+    var activeMistakes = ViewData["ActiveMistakes"] as int? ?? 0;
+    var authed = User.Identity?.IsAuthenticated == true;
+    var isAdmin = User.IsInRole(Roles.SuperAdmin);
+    var titleKey = ViewData["TitleKey"]?.ToString();
+}
+<!DOCTYPE html>
+<html lang="@L.HtmlLang" data-lang="@L.Lang" data-title-key="@titleKey" data-title-suffix=" — AvtoPrava Nova" data-lang-reload>
+<head>
+    <partial name="_NvHead" />
+    <title>@ViewData["Title"] — AvtoPrava Nova</title>
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body class="nv-body">
+    <aside class="ca-sidebar" id="caSidebar" aria-label="@L["nav.menu"]">
+        <a class="ca-logo" href="/">
+            <span class="nv-mark">@Icons.Mark</span>
+            <span><b>AvtoPrava <em>Nova</em></b><small data-i18n="nv.tagline">@L["nv.tagline"]</small></span>
+        </a>
+
+        <nav class="ca-nav">
+            <div class="ca-nav-label" data-i18n="nv.navLearn">@L["nv.navLearn"]</div>
+            <a class="ca-nav-link @Active(Is("Home", "Index"))" href="/">@Icons.Home <span data-i18n="home.pageTitle">@L["home.pageTitle"]</span></a>
+            <a class="ca-nav-link @Active(Is("Bilet"))" asp-controller="Bilet" asp-action="Index">@Icons.Layers <span data-i18n="nav.bilets">@L["nav.bilets"]</span></a>
+            <a class="ca-nav-link @Active(Is("Topic"))" asp-controller="Topic" asp-action="Index">@Icons.Book <span data-i18n="nav.topics">@L["nav.topics"]</span></a>
+            <a class="ca-nav-link" asp-controller="Test" asp-action="Index">@Icons.Target <span data-i18n="nav.real">@L["nav.real"]</span></a>
+            <a class="ca-nav-link" asp-controller="TestAll" asp-action="Index">@Icons.Flame <span data-i18n="nav.marathon">@L["nav.marathon"]</span></a>
+
+            @if (authed && !isAdmin)
+            {
+                <div class="ca-nav-label" data-i18n="nv.navProgress">@L["nv.navProgress"]</div>
+                <a class="ca-nav-link @Active(Is("Cabinet", "Index"))" asp-controller="Cabinet" asp-action="Index">@Icons.Grid <span data-i18n="cab.overview">@L["cab.overview"]</span></a>
+                <a class="ca-nav-link @Active(Is("Cabinet", "Analysis"))" asp-controller="Cabinet" asp-action="Analysis">@Icons.Chart <span data-i18n="cab.analysis">@L["cab.analysis"]</span></a>
+                <a class="ca-nav-link @Active(Is("Cabinet", "Results", "Attempt"))" asp-controller="Cabinet" asp-action="Results">@Icons.List <span data-i18n="cab.results">@L["cab.results"]</span></a>
+                <a class="ca-nav-link @Active(Is("Cabinet", "Mistakes"))" asp-controller="Cabinet" asp-action="Mistakes">
+                    @Icons.Alert <span data-i18n="cab.mistakes">@L["cab.mistakes"]</span>
+                    @if (activeMistakes > 0)
+                    {
+                        <span class="ca-nav-count">@(activeMistakes > 99 ? "99+" : activeMistakes)</span>
+                    }
+                </a>
+                <a class="ca-nav-link @Active(Is("Cabinet", "Search"))" asp-controller="Cabinet" asp-action="Search">@Icons.Search <span data-i18n="sq.title">@L["sq.title"]</span></a>
+            }
+            else if (isAdmin)
+            {
+                <div class="ca-nav-label" data-i18n="nav.admin">@L["nav.admin"]</div>
+                <a class="ca-nav-link" asp-controller="Question" asp-action="Index1">@Icons.Shield <span data-i18n="nav.admin">@L["nav.admin"]</span></a>
+                <a class="ca-nav-link" asp-controller="Analytics" asp-action="Index">@Icons.TrendUp <span data-i18n="admin.analytics">@L["admin.analytics"]</span></a>
+            }
+        </nav>
+
+        <div class="ca-side-cta">
+            <div class="nv-side-card">
+                <b data-i18n="nv.sideTitle">@L["nv.sideTitle"]</b>
+                <p data-i18n="nv.sideText">@L["nv.sideText"]</p>
+                <a class="ca-btn ca-btn-block" asp-controller="Test" asp-action="Index">@Icons.Play <span data-i18n="nv.sideBtn">@L["nv.sideBtn"]</span></a>
+            </div>
+        </div>
+    </aside>
+    <div class="ca-overlay" aria-hidden="true"></div>
+
+    <div class="ca-main">
+        <header class="ca-topbar">
+            <button type="button" class="ui-burger ca-sidebar-toggle" data-sidebar-toggle aria-controls="caSidebar" aria-label="@L["nav.menu"]" title="@L["nav.menu"]">@Icons.Menu</button>
+            <div class="ca-topbar-title" @(titleKey != null ? Html.Raw($"data-i18n=\"{titleKey}\"") : Html.Raw(""))>@ViewData["Title"]</div>
+            <div class="ca-topbar-actions">
+                @if (authed && !Is("Cabinet", "Search") && !Is("Home", "Index"))
+                {
+                    <a class="ca-topbar-search" asp-controller="Cabinet" asp-action="Search" title="@L["sq.title"]" aria-label="@L["sq.title"]">
+                        @Icons.Search <span data-i18n="nv.searchHint">@L["nv.searchHint"]</span><kbd>/</kbd>
+                    </a>
+                }
+                <partial name="_ThemeToggle" />
+                <partial name="_LangDropdown" />
+                <partial name="_UserMenu" />
+            </div>
+        </header>
+
+        <main class="ca-content">
+            @RenderBody()
+        </main>
+        <footer class="nv-footer">© 2026 AvtoPrava Nova — <span data-i18n="footer.rights">@L["footer.rights"]</span></footer>
+    </div>
+
+    @if (authed && !isAdmin)
+    {
+        <nav class="nv-tabbar" aria-label="@L["nav.menu"]">
+            <a class="nv-tab @Active(Is("Home", "Index"))" href="/">@Icons.Home <span data-i18n="home.pageTitle">@L["home.pageTitle"]</span></a>
+            <a class="nv-tab @Active(Is("Bilet"))" asp-controller="Bilet" asp-action="Index">@Icons.Layers <span data-i18n="nav.bilets">@L["nav.bilets"]</span></a>
+            <a class="nv-tab" asp-controller="Test" asp-action="Index">@Icons.Target <span data-i18n="nv.tabExam">@L["nv.tabExam"]</span></a>
+            <a class="nv-tab @Active(Is("Cabinet", "Mistakes"))" asp-controller="Cabinet" asp-action="Mistakes">@Icons.Alert <span data-i18n="cab.mistakes">@L["cab.mistakes"]</span></a>
+            <a class="nv-tab @Active(Is("Cabinet", "Analysis", "Index", "Results"))" asp-controller="Cabinet" asp-action="Analysis">@Icons.Chart <span data-i18n="cab.analysis">@L["cab.analysis"]</span></a>
+        </nav>
+    }
+
+    @Html.AntiForgeryToken()
+    <script src="~/js/ui.js" asp-append-version="true"></script>
+    <script>
+        // "/" — savol qidirishga o'tish (yozish maydonida bo'lmasa)
+        document.addEventListener("keydown", function (e) {
+            var tag = document.activeElement ? document.activeElement.tagName : "";
+            if (e.key !== "/" || /INPUT|TEXTAREA|SELECT/.test(tag)) return;
+            var field = document.querySelector("[data-search-focus]");
+            if (field) { e.preventDefault(); field.focus(); return; }
+            var link = document.querySelector(".ca-topbar-search");
+            if (link) { e.preventDefault(); location.href = link.href; }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

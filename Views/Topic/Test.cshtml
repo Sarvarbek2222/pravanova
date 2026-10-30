@@ -1,0 +1,6 @@
+@{
+    Layout = null;
+    var topic = ViewData["Topic"]?.ToString() ?? "";
+}
+@* Mavzu testi — yagona dvigatel (Views/Shared/_NovaTest.cshtml) *@
+@await Html.PartialAsync("_NovaTest", new NovaTest { Source = "/Topic/GetQuestions?topic=" + Uri.EscapeDataString(topic), Topic = topic, ExitUrl = "/Topic/Index" })

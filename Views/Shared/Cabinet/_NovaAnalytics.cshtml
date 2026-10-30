@@ -1,0 +1,259 @@
+@model CabinetModel
+@* Yangi versiyadagi qo'shimcha tahlil: tezkor ko'rsatkichlar, natijalar dinamikasi, seriya, faollik xaritasi,
+   soat va hafta kunlari, biletlar xaritasi, eng ko'p xato qilingan savollar. Kabinet va admin (o'quvchi sahifasi) uchun umumiy. *@
+@{
+    var s = Model.Stats;
+    var x = s.Extra;
+    string Sec(double? v) => v == null ? "—" : v.Value.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+    int weekDelta = x.PrevWeek > 0 ? (int)Math.Round(100.0 * (x.ThisWeek - x.PrevWeek) / x.PrevWeek) : 0;
+    var maxHour = Math.Max(1, x.ByHour.Max());
+    var maxWd = Math.Max(1, x.ByWeekday.Count == 0 ? 1 : x.ByWeekday.Max(d => d.Answered));
+    var maxHeat = Math.Max(1, x.Heatmap.Count == 0 ? 1 : x.Heatmap.Max(d => d.Count));
+    var wdKeys = new[] { "nv.wd1", "nv.wd2", "nv.wd3", "nv.wd4", "nv.wd5", "nv.wd6", "nv.wd7" };
+    var bestHour = x.ByHour.Sum() > 0 ? Array.IndexOf(x.ByHour, x.ByHour.Max()) : -1;
+    var passedBilets = x.Bilets.Values.Count(b => b.EverPassed);
+}
+
+@* ── Tezkor ko'rsatkichlar ── *@
+<div class="ca-grid ca-grid-kpi">
+    <div class="ca-card">
+        <div class="ca-kpi">
+            <span class="ca-kpi-icon info">@Icons.Timer</span>
+            <div>
+                <div class="ca-kpi-label" data-i18n="nv.avgTime">@L["nv.avgTime"]</div>
+                <div class="ca-kpi-value">@Sec(x.AvgAnswerSec)<small data-i18n="nv.secShort">@L["nv.secShort"]</small></div>
+            </div>
+        </div>
+        <p class="ca-muted ca-small" style="margin:10px 0 0;">
+            <span data-i18n="cab.pcLegendOk">@L["cab.pcLegendOk"]</span>: <b>@Sec(x.AvgCorrectSec)</b> ·
+            <span data-i18n="cab.pcLegendBad">@L["cab.pcLegendBad"]</span>: <b>@Sec(x.AvgWrongSec)</b>
+        </p>
+    </div>
+    <div class="ca-card">
+        <div class="ca-kpi">
+            <span class="ca-kpi-icon ok">@Icons.Trophy</span>
+            <div>
+                <div class="ca-kpi-label" data-i18n="nv.passChance">@L["nv.passChance"]</div>
+                <div class="ca-kpi-value">@(x.PassProbability?.ToString() ?? "—")<small>%</small></div>
+            </div>
+        </div>
+        <p class="ca-muted ca-small" style="margin:10px 0 0;" data-i18n="nv.passChanceHint">@L["nv.passChanceHint"]</p>
+    </div>
+    <div class="ca-card">
+        <div class="ca-kpi">
+            <span class="ca-kpi-icon brand">@Icons.Calendar</span>
+            <div>
+                <div class="ca-kpi-label" data-i18n="nv.thisWeek">@L["nv.thisWeek"]</div>
+                <div class="ca-kpi-value">@x.ThisWeek<small data-i18n="hm.statQuestions">@L["hm.statQuestions"]</small></div>
+            </div>
+        </div>
+        <p class="ca-small" style="margin:10px 0 0;color:@(weekDelta >= 0 ? "var(--ca-ok-ink)" : "var(--ca-bad-ink)");font-weight:700;">
+            @(weekDelta >= 0 ? "▲" : "▼") @Math.Abs(weekDelta)% <span class="ca-muted" style="font-weight:600;">@L.F("nv.vsPrevWeek", ("n", x.PrevWeek))</span>
+        </p>
+    </div>
+    <div class="ca-card">
+        <div class="ca-kpi">
+            <span class="ca-kpi-icon warn">@Icons.Layers</span>
+            <div>
+                <div class="ca-kpi-label" data-i18n="nv.biletsPassed">@L["nv.biletsPassed"]</div>
+                <div class="ca-kpi-value">@passedBilets<small>/ @x.BiletCount</small></div>
+            </div>
+        </div>
+        <div class="ca-bar ok" style="margin-top:14px;"><i data-w="@(x.BiletCount > 0 ? Math.Round(100.0 * passedBilets / x.BiletCount) : 0)"></i></div>
+    </div>
+</div>
+
+<div class="ca-grid ca-grid-main ca-section">
+    @* ── Natijalar dinamikasi ── *@
+    <div class="ca-card">
+        <div class="ca-card-head">
+            <div>
+                <h3 class="ca-card-title" data-i18n="nv.trendTitle">@L["nv.trendTitle"]</h3>
+                <p class="ca-card-sub" data-i18n="nv.trendSub">@L["nv.trendSub"]</p>
+            </div>
+            <span class="ca-badge ca-badge-ok">90% — <span data-i18n="nv.passLine">@L["nv.passLine"]</span></span>
+        </div>
+        @if (x.Trend.Count < 2)
+        {
+            <div class="ca-empty" style="padding:24px 8px;"><div class="ca-empty-icon">@Icons.Chart</div><p data-i18n="nv.trendEmpty">@L["nv.trendEmpty"]</p></div>
+        }
+        else
+        {
+            const double W = 640, H = 220, P = 34;
+            var n = x.Trend.Count;
+            double X(int i) => P + i * (W - P - 10) / (n - 1);
+            double Y(double p) => 10 + (100 - p) * (H - 10 - 24) / 100;
+            var line = string.Join(" ", x.Trend.Select((p, i) => FormattableString.Invariant($"{X(i):0.#},{Y(p.Percent):0.#}")));
+            var area = FormattableString.Invariant($"M{X(0):0.#},{Y(0):0.#} L") + line.Replace(" ", " L") + FormattableString.Invariant($" L{X(n - 1):0.#},{Y(0):0.#} Z");
+            <svg class="nv-line" viewBox="0 0 @W @H" preserveAspectRatio="none" role="img" aria-label="@L["nv.trendTitle"]">
+                <defs>
+                    <linearGradient id="nvArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366f1" stop-opacity=".28" /><stop offset="1" stop-color="#6366f1" stop-opacity="0" /></linearGradient>
+                    <linearGradient id="nvStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#06b6d4" /><stop offset=".5" stop-color="#6366f1" /><stop offset="1" stop-color="#c026d3" /></linearGradient>
+                </defs>
+                @foreach (var g in new[] { 0, 25, 50, 75, 100 })
+                {
+                    <line class="grid" x1="@P" x2="@W" y1="@Y(g).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" y2="@Y(g).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" />
+                    @Html.Raw($"<text class=\"axis\" x=\"0\" y=\"{(Y(g) + 4).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)}\">{g}%</text>")
+                }
+                <line class="pass" x1="@P" x2="@W" y1="@Y(90).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" y2="@Y(90).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" />
+                <path class="area" d="@area" />
+                <polyline class="path" points="@line" />
+                @for (int i = 0; i < n; i++)
+                {
+                    var p = x.Trend[i];
+                    <a href="@Model.AttemptUrl(p.AttemptId)">
+                        <circle cx="@X(i).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" cy="@Y(p.Percent).ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)" r="4.5" class="@(p.Passed ? "ok" : p.Percent < 60 ? "bad" : "")">
+                            <title>@p.At.ToString("dd.MM HH:mm") · @L["testType." + p.Type]@(string.IsNullOrEmpty(p.Ref) || p.Type == TestTypes.Topic ? "" : " №" + p.Ref) · @Math.Round(p.Percent)%</title>
+                        </circle>
+                    </a>
+                }
+            </svg>
+            <div class="ca-chart-legend">
+                <span><i style="background:var(--ca-ok)"></i><span data-i18n="cab.passed">@L["cab.passed"]</span></span>
+                <span><i style="background:var(--ca-brand)"></i><span data-i18n="nv.lgMid">@L["nv.lgMid"]</span></span>
+                <span><i style="background:#f43f5e"></i><span data-i18n="nv.lgLow">@L["nv.lgLow"]</span></span>
+            </div>
+        }
+    </div>
+
+    @* ── Seriya ── *@
+    <div class="ca-card">
+        <div class="ca-card-head"><h3 class="ca-card-title" data-i18n="nv.streakTitle">@L["nv.streakTitle"]</h3></div>
+        <div class="nv-streak">
+            <span class="nv-flame">@Icons.Flame</span>
+            <div>
+                <b>@s.StreakDays</b> <span class="ca-muted" data-i18n="nv.daysInRow">@L["nv.daysInRow"]</span>
+                <div class="ca-muted ca-small">@L.F("nv.bestStreak", ("n", x.BestStreak))</div>
+            </div>
+        </div>
+        <div class="nv-days7">
+            @foreach (var (day, on) in x.Last7)
+            {
+                <span class="@(on ? "on" : "")" title="@day.ToString("dd.MM")">@L[wdKeys[((int)day.DayOfWeek + 6) % 7]]</span>
+            }
+        </div>
+        <p class="ca-muted ca-small" style="margin:14px 0 0;">@L.F("nv.todayLine", ("n", x.Today))</p>
+    </div>
+</div>
+
+@* ── Faollik xaritasi ── *@
+<div class="ca-card ca-section">
+    <div class="ca-card-head">
+        <div>
+            <h3 class="ca-card-title" data-i18n="nv.heatTitle">@L["nv.heatTitle"]</h3>
+            <p class="ca-card-sub" data-i18n="nv.heatSub">@L["nv.heatSub"]</p>
+        </div>
+    </div>
+    <div class="nv-heat" aria-label="@L["nv.heatTitle"]">
+        @foreach (var d in x.Heatmap)
+        {
+            var lvl = d.Count <= 0 ? 0 : d.Count >= maxHeat * .75 ? 4 : d.Count >= maxHeat * .5 ? 3 : d.Count >= maxHeat * .25 ? 2 : 1;
+            <i class="@(lvl > 0 ? "l" + lvl : "")" style="@(d.Count < 0 ? "visibility:hidden" : "")" title="@d.Date.ToString("dd.MM.yyyy") — @Math.Max(0, d.Count)"></i>
+        }
+    </div>
+    <div class="nv-heat-legend"><span data-i18n="nv.less">@L["nv.less"]</span><i style="background:var(--ca-track)"></i><i class="l1" style="background:color-mix(in srgb,var(--ca-brand) 28%,var(--ca-track))"></i><i style="background:color-mix(in srgb,var(--ca-brand) 52%,var(--ca-track))"></i><i style="background:color-mix(in srgb,var(--ca-brand) 76%,var(--ca-track))"></i><i style="background:var(--ca-brand-2)"></i><span data-i18n="nv.more">@L["nv.more"]</span></div>
+</div>
+
+<div class="ca-grid ca-grid-2 ca-section">
+    @* ── Hafta kunlari ── *@
+    <div class="ca-card">
+        <div class="ca-card-head">
+            <div>
+                <h3 class="ca-card-title" data-i18n="nv.weekdayTitle">@L["nv.weekdayTitle"]</h3>
+                <p class="ca-card-sub" data-i18n="nv.weekdaySub">@L["nv.weekdaySub"]</p>
+            </div>
+        </div>
+        <div class="nv-week">
+            @for (int i = 0; i < x.ByWeekday.Count; i++)
+            {
+                var d = x.ByWeekday[i];
+                <div title="@d.Answered · @Math.Round(d.Accuracy * 100)%">
+                    <div class="bar"><i style="height:@(Math.Round(100.0 * d.Answered / maxWd))%"></i></div>
+                    <span data-i18n="@wdKeys[i]">@L[wdKeys[i]]</span>
+                    <b>@(d.Answered == 0 ? "—" : Math.Round(d.Accuracy * 100) + "%")</b>
+                </div>
+            }
+        </div>
+    </div>
+
+    @* ── Soatlar ── *@
+    <div class="ca-card">
+        <div class="ca-card-head">
+            <div>
+                <h3 class="ca-card-title" data-i18n="nv.hourTitle">@L["nv.hourTitle"]</h3>
+                <p class="ca-card-sub">@(bestHour >= 0 ? L.F("nv.bestHour", ("h", $"{bestHour:00}:00–{(bestHour + 1) % 24:00}:00")) : L["cab.noActivity"])</p>
+            </div>
+        </div>
+        <div class="nv-hours">
+            @for (int h = 0; h < 24; h++)
+            {
+                <div class="@(x.ByHour[h] == 0 ? "zero" : "")" style="height:@(Math.Max(3, Math.Round(100.0 * x.ByHour[h] / maxHour)))%" title="@h.ToString("00"):00 — @x.ByHour[h]"></div>
+            }
+        </div>
+        <div class="nv-hours-axis">@for (int h = 0; h < 24; h++) { <span>@(h % 3 == 0 ? h.ToString() : "")</span> }</div>
+    </div>
+</div>
+
+<div class="ca-grid ca-grid-2 ca-section">
+    @* ── Biletlar xaritasi ── *@
+    <div class="ca-card">
+        <div class="ca-card-head">
+            <div>
+                <h3 class="ca-card-title" data-i18n="nv.biletMap">@L["nv.biletMap"]</h3>
+                <p class="ca-card-sub" data-i18n="nv.biletMapSub">@L["nv.biletMapSub"]</p>
+            </div>
+        </div>
+        <div class="nv-biletmap">
+            @for (int b = 1; b <= x.BiletCount; b++)
+            {
+                x.Bilets.TryGetValue(b, out var bp);
+                <a class="@(bp?.Status)" href="@(Model.IsAdminView ? "#" : "/Bilet/TestPage?biletNumber=" + b)"
+                   title="@(bp == null ? L["nv.stNew"] : L.F("nv.biletTip", ("b", b), ("best", Math.Round(bp.BestPercent)), ("n", bp.Attempts)))">@b</a>
+            }
+        </div>
+        <div class="nv-legend" style="margin-top:14px;">
+            <span><i style="background:#10b981"></i><span data-i18n="nv.stPassed">@L["nv.stPassed"]</span></span>
+            <span><i style="background:#f59e0b"></i><span data-i18n="nv.stPartial">@L["nv.stPartial"]</span></span>
+            <span><i style="background:#f43f5e"></i><span data-i18n="nv.stFailed">@L["nv.stFailed"]</span></span>
+        </div>
+    </div>
+
+    @* ── Eng ko'p xato qilingan savollar ── *@
+    <div class="ca-card">
+        <div class="ca-card-head">
+            <div>
+                <h3 class="ca-card-title" data-i18n="nv.topMissed">@L["nv.topMissed"]</h3>
+                <p class="ca-card-sub" data-i18n="nv.topMissedSub">@L["nv.topMissedSub"]</p>
+            </div>
+            @if (!Model.IsAdminView && x.TopMissed.Count > 0)
+            {
+                <a class="ca-btn ca-btn-primary ca-btn-sm" href="/Cabinet/Practice?ids=@string.Join(",", x.TopMissed.Select(m => m.Question.Id))">@Icons.Repeat <span data-i18n="nv.practiceThese">@L["nv.practiceThese"]</span></a>
+            }
+        </div>
+        @if (x.TopMissed.Count == 0)
+        {
+            <p class="ca-muted" style="margin:0;" data-i18n="cab.noMistakes">@L["cab.noMistakes"]</p>
+        }
+        else
+        {
+            <ol class="nv-rank">
+                @foreach (var m in x.TopMissed)
+                {
+                    var q = m.Question;
+                    <li>
+                        @if (!string.IsNullOrEmpty(q.ImageUrl))
+                        {
+                            <img src="/uploads/@q.ImageUrl?w=160" alt="" loading="lazy" />
+                        }
+                        else
+                        {
+                            <span class="noimg"></span>
+                        }
+                        <span class="q" data-i18n-pick data-uz="@q.QuestionUZ" data-ru="@(q.QuestionRU ?? q.QuestionUZ)" data-uzk="@(q.QuestionUZK ?? q.QuestionUZ)">@L.Pick(q.QuestionUZ, q.QuestionRU, q.QuestionUZK)</span>
+                        <span class="n"><b>@m.Wrong×</b>@L.F("nv.ofTries", ("n", m.Total))</span>
+                    </li>
+                }
+            </ol>
+        }
+    </div>
+</div>

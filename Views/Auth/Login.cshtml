@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+    ViewData["TitleKey"] = "login.pageTitle";
+    ViewData["Title"] = L["login.pageTitle"];
+    var hasError = ViewBag.Error != null;
+}
+<!DOCTYPE html>
+<html lang="@L.HtmlLang" data-lang="@L.Lang" data-title-key="login.pageTitle" data-title-suffix=" — AvtoPrava Nova">
+<head>
+    <partial name="_NvHead" />
+    <title>@ViewData["Title"] — AvtoPrava Nova</title>
+</head>
+<body class="nv-body">
+    <div class="nv-auth">
+        <section class="nv-auth-side">
+            <div class="nv-auth-brand"><span class="nv-mark">@Icons.Mark</span> AvtoPrava Nova</div>
+            <div>
+                <h1>@Html.Raw(L["nv.loginTitle"])</h1>
+                <p data-i18n="login.brandText">@L["login.brandText"]</p>
+            </div>
+            <div class="nv-auth-feats">
+                <div>@Icons.Layers <span data-i18n="nv.feat1">@L["nv.feat1"]</span></div>
+                <div>@Icons.Target <span data-i18n="nv.feat2">@L["nv.feat2"]</span></div>
+                <div>@Icons.Chart <span data-i18n="nv.feat3">@L["nv.feat3"]</span></div>
+                <div>@Icons.Repeat <span data-i18n="nv.feat4">@L["nv.feat4"]</span></div>
+            </div>
+        </section>
+
+        <main class="nv-auth-main">
+            <div class="nv-auth-top">
+                <partial name="_ThemeToggle" />
+                <partial name="_LangDropdown" />
+            </div>
+
+            <div class="nv-auth-box">
+                <h2 data-i18n="login.welcome">@L["login.welcome"]</h2>
+                <p data-i18n="login.subtitle">@L["login.subtitle"]</p>
+
+                @if (hasError)
+                {
+                    <div class="nv-error" role="alert" style="@(ViewBag.Notice == true ? "background:var(--ca-info-soft);color:var(--ca-info-ink)" : "")">
+                        @Icons.Alert <span data-i18n="@ViewBag.ErrorKey">@ViewBag.Error</span>
+                    </div>
+                }
+
+                <form asp-controller="Auth" asp-action="Login" method="post" id="loginForm" novalidate>
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+                    <label class="nv-field" for="username">
+                        <span data-i18n="login.username">@L["login.username"]</span>
+                        <span class="nv-input-wrap">
+                            <input id="username" name="username" value="@ViewBag.Username" class="nv-input"
+                                   required autocomplete="username" autocapitalize="none" spellcheck="false" autofocus
+                                   placeholder="@L["login.usernamePh"]" data-i18n-placeholder="login.usernamePh" />
+                            @Icons.User
+                        </span>
+                    </label>
+
+                    <label class="nv-field" for="password">
+                        <span data-i18n="login.password">@L["login.password"]</span>
+                        <span class="nv-input-wrap">
+                            <input id="password" name="password" type="password" class="nv-input" required autocomplete="current-password"
+                                   placeholder="@L["login.passwordPh"]" data-i18n-placeholder="login.passwordPh" />
+                            @Icons.Lock
+                            <button type="button" class="nv-eye" id="togglePwd" aria-pressed="false" aria-label="@L["login.showPassword"]" title="@L["login.showPassword"]">
+                                <span class="on">@Icons.Eye</span><span class="off">@Icons.EyeOff</span>
+                            </button>
+                        </span>
+                        <span class="ca-small" id="capsWarn" style="display:none;color:var(--ca-warn-ink);margin-top:6px;font-weight:700;" data-i18n="login.capsLock">@L["login.capsLock"]</span>
+                    </label>
+
+                    <button type="submit" class="ca-btn ca-btn-primary" id="submitBtn" style="margin-top:8px;">
+                        <span id="submitText" data-i18n="login.submit">@L["login.submit"]</span> @Icons.ArrowRight
+                    </button>
+                </form>
+
+                <p class="ca-muted ca-small" style="margin:18px 0 0;display:flex;gap:8px;align-items:flex-start;">
+                    <span style="width:18px;height:18px;flex-shrink:0;display:inline-flex;">@Icons.Info</span>
+                    <span data-i18n="login.help">@L["login.help"]</span>
+                </p>
+            </div>
+
+            <div class="nv-auth-foot">© 2026 AvtoPrava Nova · <span data-i18n="footer.rights">@L["footer.rights"]</span></div>
+        </main>
+    </div>
+
+    <script src="~/js/ui.js" asp-append-version="true"></script>
+    <script>
+        (function () {
+            var pwd = document.getElementById("password");
+            var btn = document.getElementById("togglePwd");
+            var caps = document.getElementById("capsWarn");
+            var form = document.getElementById("loginForm");
+            var submit = document.getElementById("submitBtn");
+
+            function label() {
+                var shown = pwd.type === "text";
+                var text = I18n.t(shown ? "login.hidePassword" : "login.showPassword");
+                btn.setAttribute("aria-label", text);
+                btn.setAttribute("title", text);
+                btn.setAttribute("aria-pressed", shown ? "true" : "false");
+                btn.classList.toggle("on", shown);
+            }
+            btn.addEventListener("click", function () {
+                pwd.type = pwd.type === "password" ? "text" : "password";
+                label();
+                pwd.focus();
+            });
+            document.addEventListener("i18n:change", label);
+
+            function checkCaps(e) { if (e.getModifierState) caps.style.display = e.getModifierState("CapsLock") ? "block" : "none"; }
+            pwd.addEventListener("keydown", checkCaps);
+            pwd.addEventListener("keyup", checkCaps);
+            pwd.addEventListener("blur", function () { caps.style.display = "none"; });
+
+            form.addEventListener("submit", function (e) {
+                var user = document.getElementById("username"), ok = true;
+                [user, pwd].forEach(function (el) {
+                    var empty = !el.value.trim();
+                    el.style.borderColor = empty ? "var(--ca-bad)" : "";
+                    if (empty && ok) { el.focus(); ok = false; }
+                });
+                if (!ok) { e.preventDefault(); return; }
+                submit.style.opacity = ".75";
+                document.getElementById("submitText").textContent = I18n.t("login.signingIn");
+            });
+
+            // Xato bo'lsa — parol maydoniga fokus
+            if (document.querySelector(".nv-error") && document.getElementById("username").value) pwd.focus();
+        })();
+    </script>
+</body>
+</html>

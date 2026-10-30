@@ -1,0 +1,102 @@
+@model List<DayStat>
+@* 30 kunlik taraqqiyot: har bir kun — alohida ustun (yashil — to'g'ri, qizil — xato), ostida kun raqami,
+   bosilganda / ustiga kelinganda — o'sha kunning to'liq tafsiloti. *@
+@using System.Globalization
+@{
+    var days = Model;
+    var inv = CultureInfo.InvariantCulture;
+    int maxCount = Math.Max(1, days.Max(d => d.Answered));
+    // Y o'qi uchun "chiroyli" yuqori chegara (5, 10, 20, 25, 50, 100 ...)
+    int[] nice = { 5, 10, 20, 25, 40, 50, 80, 100, 150, 200, 250, 300, 400, 500, 750, 1000, 1500, 2000 };
+    int top = nice.FirstOrDefault(v => v >= maxCount);
+    if (top == 0) top = (int)Math.Ceiling(maxCount / 1000.0) * 1000;
+
+    int total = days.Sum(d => d.Answered);
+    int correct = days.Sum(d => d.Correct);
+    int activeDays = days.Count(d => d.Answered > 0);
+    var best = days.Where(d => d.Answered > 0).OrderByDescending(d => d.Answered).FirstOrDefault();
+    var today = DateTime.Now.Date;
+    int totalMinutes = days.Sum(d => d.Minutes);
+    // Davomiylik: "1 soat 25 daqiqa" / "40 daqiqa" (ustun ostida qisqa: "1:25")
+    string Dur(int min) => min >= 60
+        ? (min % 60 == 0 ? L.F("cab.durH", ("h", min / 60)) : L.F("cab.durHM", ("h", min / 60), ("m", min % 60)))
+        : L.F("cab.durM", ("m", min));
+    string Short(int min) => min >= 60 ? $"{min / 60}:{min % 60:00}" : L.F("cab.durMShort", ("m", min));
+}
+<div class="ca-card pc-card">
+    <div class="ca-card-head">
+        <div>
+            <h3 class="ca-card-title" data-i18n="cab.progress">@L["cab.progress"]</h3>
+            <p class="ca-card-sub" data-i18n="cab.progressHint2">@L["cab.progressHint2"]</p>
+        </div>
+    </div>
+
+    @if (total == 0)
+    {
+        <p class="ca-muted" data-i18n="cab.noActivity">@L["cab.noActivity"]</p>
+    }
+    else
+    {
+        <div class="pc-summary">
+            <div><b>@total</b><span data-i18n="cab.pcAnswers">@L["cab.pcAnswers"]</span></div>
+            <div><b style="color:@Score.Color(100.0 * correct / total)">@Score.Pct((double)correct / total)%</b><span data-i18n="cab.pcCorrect">@L["cab.pcCorrect"]</span></div>
+            <div><b>@activeDays<small> / 30</small></b><span data-i18n="cab.pcActiveDays">@L["cab.pcActiveDays"]</span></div>
+            <div class="pc-time-tile"><b>@(totalMinutes > 0 ? Dur(totalMinutes) : "—")</b><span data-i18n="cab.pcTotalTime">@L["cab.pcTotalTime"]</span></div>
+            @if (best != null)
+            {
+                <div><b>@best.Answered</b><span>@L.F("cab.pcBestDay", ("date", best.Date.ToString("d MMMM")))</span></div>
+            }
+        </div>
+
+        <div class="pc-chart">
+            <div class="pc-yaxis" aria-hidden="true">
+                <span>@top</span><span>@(top / 2)</span><span>0</span>
+            </div>
+            <div class="pc-scroll" data-pc-scroll>
+                <div class="pc-cols">
+                    @for (int i = 0; i < days.Count; i++)
+                    {
+                        var d = days[i];
+                        int wrong = d.Answered - d.Correct;
+                        double h = 100.0 * d.Answered / top;
+                        double badShare = d.Answered > 0 ? 100.0 * wrong / d.Answered : 0;
+                        bool isToday = d.Date == today;
+                        bool newMonth = i == 0 || d.Date.Day == 1;
+                        var dateText = d.Date.ToString("d MMMM, dddd");
+                        var tip = d.Answered > 0
+                            ? L.F("cab.pcTip", ("date", dateText), ("n", d.Answered), ("ok", d.Correct), ("bad", wrong), ("pct", Score.Pct(d.Accuracy)))
+                            : L.F("cab.pcTipEmpty", ("date", dateText));
+                        var timeTip = d.Minutes > 0 ? L.F("cab.pcTipTime", ("time", Dur(d.Minutes))) : "";
+                        <button type="button" class="pc-col @(isToday ? "today" : "") @(d.Answered == 0 ? "empty" : "") @(i < 4 ? "left" : i > days.Count - 5 ? "right" : "")" aria-label="@tip @timeTip">
+                            <span class="pc-plot">
+                                @if (d.Answered > 0)
+                                {
+                                    <span class="pc-bar" style="height:@(Math.Max(h, 2).ToString("0.#", inv))%">
+                                        <span class="pc-num">@d.Answered</span>
+                                        <i class="bad" style="height:@(badShare.ToString("0.#", inv))%"></i>
+                                        <i class="ok"></i>
+                                    </span>
+                                }
+                            </span>
+                            <span class="pc-day">@d.Date.Day</span>
+                            <span class="pc-time">@(d.Minutes > 0 ? Short(d.Minutes) : "")</span>
+                            <span class="pc-month">@(newMonth ? d.Date.ToString("MMM") : "")</span>
+                            <span class="pc-tip" role="tooltip">@tip@if (timeTip != "") {<span class="pc-tip-time">⏱ @timeTip</span>}</span>
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="ca-chart-legend">
+            <span><i style="background:#22c55e"></i><span data-i18n="cab.pcLegendOk">@L["cab.pcLegendOk"]</span></span>
+            <span><i style="background:#ef4444"></i><span data-i18n="cab.pcLegendBad">@L["cab.pcLegendBad"]</span></span>
+            <span class="ca-muted" data-i18n="cab.pcLegendHint">@L["cab.pcLegendHint"]</span>
+            <span class="ca-muted" data-i18n="cab.pcLegendTime">@L["cab.pcLegendTime"]</span>
+        </div>
+        <script>
+            // Telefonda diagramma bugungi kunga (o'ng tomonga) aylantirilgan holda ochilsin
+            document.querySelectorAll("[data-pc-scroll]").forEach(function (el) { el.scrollLeft = el.scrollWidth; });
+        </script>
+    }
+</div>

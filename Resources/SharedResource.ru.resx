@@ -1,0 +1,2337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Rus tili.
+  Kalit (name) — kodda ishlatiladigan nom, <value> — shu tildagi matn.
+  {n} kabi joylar parametrlar — tarjimada o'zgartirmang. HTML teglar (<br>, <span>) saqlanishi kerak.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="lang.uz" xml:space="preserve">
+    <value>UZB</value>
+  </data>
+  <data name="lang.uzk" xml:space="preserve">
+    <value>УЗБ</value>
+  </data>
+  <data name="lang.ru" xml:space="preserve">
+    <value>РУ</value>
+  </data>
+  <data name="lang.uz.full" xml:space="preserve">
+    <value>Узбекский (латиница)</value>
+  </data>
+  <data name="lang.uzk.full" xml:space="preserve">
+    <value>Узбекский (кириллица)</value>
+  </data>
+  <data name="lang.ru.full" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="lang.choose" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="nav.q20" xml:space="preserve">
+    <value>20 вопросов</value>
+  </data>
+  <data name="nav.q40" xml:space="preserve">
+    <value>40 вопросов</value>
+  </data>
+  <data name="nav.q80" xml:space="preserve">
+    <value>80 вопросов</value>
+  </data>
+  <data name="nav.q100" xml:space="preserve">
+    <value>100 вопросов</value>
+  </data>
+  <data name="nav.q200" xml:space="preserve">
+    <value>200 вопросов</value>
+  </data>
+  <data name="nav.bilets" xml:space="preserve">
+    <value>Билеты</value>
+  </data>
+  <data name="nav.marathon" xml:space="preserve">
+    <value>Марафон</value>
+  </data>
+  <data name="nav.topics" xml:space="preserve">
+    <value>Темы</value>
+  </data>
+  <data name="nav.real" xml:space="preserve">
+    <value>Реальный экзамен</value>
+  </data>
+  <data name="footer.rights" xml:space="preserve">
+    <value>Все права защищены</value>
+  </data>
+  <data name="home.pageTitle" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="home.heroTitle" xml:space="preserve">
+    <value>ПЛАТФОРМА&lt;br&gt;ПОДГОТОВКИ</value>
+  </data>
+  <data name="home.heroDesc" xml:space="preserve">
+    <value>Готовьтесь к реальному экзамену на водительские права с AVTOPRAVA_SAM: эффективные учебные курсы и 100 пробных тестов.</value>
+  </data>
+  <data name="home.admin" xml:space="preserve">
+    <value>УПРАВЛЕНИЕ</value>
+  </data>
+  <data name="home.more" xml:space="preserve">
+    <value>ПОДРОБНЕЕ</value>
+  </data>
+  <data name="home.statQuestions" xml:space="preserve">
+    <value>Вопросов</value>
+  </data>
+  <data name="home.statStudents" xml:space="preserve">
+    <value>Учеников</value>
+  </data>
+  <data name="home.statLicensed" xml:space="preserve">
+    <value>Получили права</value>
+  </data>
+  <data name="home.statYears" xml:space="preserve">
+    <value>Лет опыта</value>
+  </data>
+  <data name="home.scroll" xml:space="preserve">
+    <value>Вниз</value>
+  </data>
+  <data name="home.mFast" xml:space="preserve">
+    <value>Быстрый курс</value>
+  </data>
+  <data name="home.mNormal" xml:space="preserve">
+    <value>Обычный курс</value>
+  </data>
+  <data name="home.mReal" xml:space="preserve">
+    <value>Реальный экзамен</value>
+  </data>
+  <data name="home.mRules" xml:space="preserve">
+    <value>Правила дорожного движения</value>
+  </data>
+  <data name="home.mCount" xml:space="preserve">
+    <value>1250+ вопросов</value>
+  </data>
+  <data name="home.mCert" xml:space="preserve">
+    <value>Сертификат</value>
+  </data>
+  <data name="home.coursesLabel" xml:space="preserve">
+    <value>Курсы и услуги</value>
+  </data>
+  <data name="home.coursesTitle" xml:space="preserve">
+    <value>Какой путь&lt;br&gt;вы выберете?</value>
+  </data>
+  <data name="home.fastTitle" xml:space="preserve">
+    <value>Быстрый курс</value>
+  </data>
+  <data name="home.fastDesc" xml:space="preserve">
+    <value>Изучите правила дорожного движения за 1 неделю. Экономьте время и готовьтесь самым быстрым способом.</value>
+  </data>
+  <data name="home.normalTitle" xml:space="preserve">
+    <value>Обычный курс</value>
+  </data>
+  <data name="home.normalDesc" xml:space="preserve">
+    <value>Постепенное и глубокое освоение знаний. Двигайтесь дальше, полностью понимая каждое правило.</value>
+  </data>
+  <data name="home.realTitle" xml:space="preserve">
+    <value>Реальный экзамен</value>
+  </data>
+  <data name="home.realDesc" xml:space="preserve">
+    <value>Тренируйтесь в условиях настоящего экзамена. Проверьте себя с ограничением времени и системой баллов.</value>
+  </data>
+  <data name="home.topicsTitle" xml:space="preserve">
+    <value>По темам</value>
+  </data>
+  <data name="home.topicsDesc" xml:space="preserve">
+    <value>Вопросы разделены по темам. Изучайте каждую тему отдельно и укрепляйте слабые места.</value>
+  </data>
+  <data name="home.view" xml:space="preserve">
+    <value>Смотреть</value>
+  </data>
+  <data name="home.start" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="home.aboutLabel" xml:space="preserve">
+    <value>О системе</value>
+  </data>
+  <data name="home.aboutTitle" xml:space="preserve">
+    <value>ПЛАТФОРМА &lt;span style="color:var(--red)"&gt;AVTOPRAVA_SAM&lt;/span&gt;</value>
+  </data>
+  <data name="home.aboutDesc" xml:space="preserve">
+    <value>Платформа работает более 4 лет. Сотни учеников успешно сдали экзамен и получили водительские права.</value>
+  </data>
+  <data name="home.aboutQuestions" xml:space="preserve">
+    <value>Экзаменационных вопросов</value>
+  </data>
+  <data name="home.aboutStudents" xml:space="preserve">
+    <value>Активных учеников</value>
+  </data>
+  <data name="home.aboutLicensed" xml:space="preserve">
+    <value>Получили права</value>
+  </data>
+  <data name="home.aboutYears" xml:space="preserve">
+    <value>Лет опыта</value>
+  </data>
+  <data name="home.tipsLabel" xml:space="preserve">
+    <value>Полезные советы</value>
+  </data>
+  <data name="home.tipsTitle" xml:space="preserve">
+    <value>СЕКРЕТ&lt;br&gt;УСПЕХА</value>
+  </data>
+  <data name="home.tip1Title" xml:space="preserve">
+    <value>Регулярная практика</value>
+  </data>
+  <data name="home.tip1Desc" xml:space="preserve">
+    <value>Закрепляйте знания, ежедневно повторяя правила и решая тесты. Повторение — лучший метод.</value>
+  </data>
+  <data name="home.tip1Tag" xml:space="preserve">
+    <value>Важно</value>
+  </data>
+  <data name="home.tip2Title" xml:space="preserve">
+    <value>Изучение теории</value>
+  </data>
+  <data name="home.tip2Desc" xml:space="preserve">
+    <value>Глубокое понимание правил дорожного движения значительно повышает шансы на успех на экзамене.</value>
+  </data>
+  <data name="home.tip2Tag" xml:space="preserve">
+    <value>Рекомендация</value>
+  </data>
+  <data name="home.tip3Title" xml:space="preserve">
+    <value>Пробный экзамен</value>
+  </data>
+  <data name="home.tip3Desc" xml:space="preserve">
+    <value>Тренируйтесь в условиях реального экзамена, контролируйте время и определите свой уровень знаний.</value>
+  </data>
+  <data name="home.tip3Tag" xml:space="preserve">
+    <value>Полезно</value>
+  </data>
+  <data name="test.pageTitle" xml:space="preserve">
+    <value>Тест</value>
+  </data>
+  <data name="test.loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="test.imageAlt" xml:space="preserve">
+    <value>Изображение к вопросу</value>
+  </data>
+  <data name="test.exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="test.finish" xml:space="preserve">
+    <value>Завершить</value>
+  </data>
+  <data name="test.result" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="test.review" xml:space="preserve">
+    <value>Просмотреть</value>
+  </data>
+  <data name="test.reviewErrors" xml:space="preserve">
+    <value>Работа над ошибками</value>
+  </data>
+  <data name="test.retry" xml:space="preserve">
+    <value>Пройти заново</value>
+  </data>
+  <data name="test.correct" xml:space="preserve">
+    <value>Правильно: {correct} / {total} ({percent}%)</value>
+  </data>
+  <data name="test.wrong" xml:space="preserve">
+    <value>Неправильных ответов: {n}</value>
+  </data>
+  <data name="test.skipped" xml:space="preserve">
+    <value>Без ответа: {n}</value>
+  </data>
+  <data name="test.passed" xml:space="preserve">
+    <value>Экзамен сдан!</value>
+  </data>
+  <data name="test.failed" xml:space="preserve">
+    <value>Экзамен не сдан</value>
+  </data>
+  <data name="test.noOptions" xml:space="preserve">
+    <value>У этого вопроса нет вариантов ответа.</value>
+  </data>
+  <data name="test.noQuestions" xml:space="preserve">
+    <value>Вопросы не найдены.</value>
+  </data>
+  <data name="test.loadError" xml:space="preserve">
+    <value>Ошибка при загрузке вопросов.</value>
+  </data>
+  <data name="test.pageError" xml:space="preserve">
+    <value>Ошибка при загрузке страницы:</value>
+  </data>
+  <data name="test.serverError" xml:space="preserve">
+    <value>Ошибка сервера: HTTP {status}</value>
+  </data>
+  <data name="test.badJson" xml:space="preserve">
+    <value>Сервер не вернул JSON.</value>
+  </data>
+  <data name="test.badData" xml:space="preserve">
+    <value>Сервер вернул некорректные данные.</value>
+  </data>
+  <data name="test.unknownError" xml:space="preserve">
+    <value>Неизвестная ошибка</value>
+  </data>
+  <data name="test.controllerError" xml:space="preserve">
+    <value>Ошибка сервера</value>
+  </data>
+  <data name="bilet.pageTitle" xml:space="preserve">
+    <value>Билеты</value>
+  </data>
+  <data name="bilet.list" xml:space="preserve">
+    <value>Список билетов</value>
+  </data>
+  <data name="bilet.item" xml:space="preserve">
+    <value>Билет {n}</value>
+  </data>
+  <data name="bilet.title" xml:space="preserve">
+    <value>Билет №</value>
+  </data>
+  <data name="bilet.noQuestions" xml:space="preserve">
+    <value>Для этого билета вопросы не найдены.</value>
+  </data>
+  <data name="bilet.loadError" xml:space="preserve">
+    <value>Ошибка при загрузке билета.</value>
+  </data>
+  <data name="bilet.range" xml:space="preserve">
+    <value>Номер билета должен быть от 1 до {max}.</value>
+  </data>
+  <data name="topics.pageTitle" xml:space="preserve">
+    <value>Темы</value>
+  </data>
+  <data name="topics.eyebrow" xml:space="preserve">
+    <value>Тесты по темам</value>
+  </data>
+  <data name="topics.title" xml:space="preserve">
+    <value>ВЫБЕРИТЕ &lt;span&gt;ТЕМУ&lt;/span&gt;</value>
+  </data>
+  <data name="topics.sub" xml:space="preserve">
+    <value>Тренируйтесь по каждой теме отдельно — вопросы сгруппированы по темам.</value>
+  </data>
+  <data name="topics.count" xml:space="preserve">
+    <value>Вопросов: {n}</value>
+  </data>
+  <data name="topics.noQuestions" xml:space="preserve">
+    <value>По этой теме вопросы не найдены.</value>
+  </data>
+  <data name="topics.noQuestionsDb" xml:space="preserve">
+    <value>Вопросов по этой теме нет в базе.</value>
+  </data>
+  <data name="topics.topic" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="login.pageTitle" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="login.title" xml:space="preserve">
+    <value>Вход в систему</value>
+  </data>
+  <data name="login.username" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="login.password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="login.submit" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="login.error" xml:space="preserve">
+    <value>Неверный логин или пароль!</value>
+  </data>
+  <data name="admin.panel" xml:space="preserve">
+    <value>Панель администратора</value>
+  </data>
+  <data name="admin.admin" xml:space="preserve">
+    <value>Админ</value>
+  </data>
+  <data name="admin.main" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="admin.dashboard" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+  <data name="admin.questions" xml:space="preserve">
+    <value>Вопросы</value>
+  </data>
+  <data name="admin.addQuestion" xml:space="preserve">
+    <value>Добавить вопрос</value>
+  </data>
+  <data name="admin.system" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="admin.logout" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="admin.role" xml:space="preserve">
+    <value>Суперадмин</value>
+  </data>
+  <data name="admin.status" xml:space="preserve">
+    <value>Система работает</value>
+  </data>
+  <data name="admin.new" xml:space="preserve">
+    <value>НОВОЕ</value>
+  </data>
+  <data name="admin.menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="dash.pageTitle" xml:space="preserve">
+    <value>Статистика вопросов</value>
+  </data>
+  <data name="dash.title" xml:space="preserve">
+    <value>База &lt;span&gt;вопросов&lt;/span&gt;</value>
+  </data>
+  <data name="dash.total" xml:space="preserve">
+    <value>Всего вопросов</value>
+  </data>
+  <data name="dash.allTypes" xml:space="preserve">
+    <value>По всем типам тестов</value>
+  </data>
+  <data name="dash.bar" xml:space="preserve">
+    <value>{n} вопросов</value>
+  </data>
+  <data name="dash.card" xml:space="preserve">
+    <value>Тест из {n} вопросов</value>
+  </data>
+  <data name="dash.real" xml:space="preserve">
+    <value>Реальный экзамен</value>
+  </data>
+  <data name="dash.tagFast" xml:space="preserve">
+    <value>Быстрый</value>
+  </data>
+  <data name="dash.tagMid" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="dash.tagExt" xml:space="preserve">
+    <value>Расширенный</value>
+  </data>
+  <data name="dash.tagFull" xml:space="preserve">
+    <value>Полный</value>
+  </data>
+  <data name="dash.tagSpecial" xml:space="preserve">
+    <value>Специальный</value>
+  </data>
+  <data name="dash.tagReal" xml:space="preserve">
+    <value>Реальный</value>
+  </data>
+  <data name="dash.translations" xml:space="preserve">
+    <value>Переводы</value>
+  </data>
+  <data name="dash.withRu" xml:space="preserve">
+    <value>Есть перевод на русский</value>
+  </data>
+  <data name="dash.withUzk" xml:space="preserve">
+    <value>Есть кириллица</value>
+  </data>
+  <data name="qs.pageTitle" xml:space="preserve">
+    <value>База вопросов</value>
+  </data>
+  <data name="qs.title" xml:space="preserve">
+    <value>БАЗА &lt;span&gt;ВОПРОСОВ&lt;/span&gt;</value>
+  </data>
+  <data name="qs.subtitle" xml:space="preserve">
+    <value>Управление всеми тестовыми вопросами</value>
+  </data>
+  <data name="qs.new" xml:space="preserve">
+    <value>Новый вопрос</value>
+  </data>
+  <data name="qs.total" xml:space="preserve">
+    <value>Всего вопросов</value>
+  </data>
+  <data name="qs.showing" xml:space="preserve">
+    <value>Показано</value>
+  </data>
+  <data name="qs.withAnswer" xml:space="preserve">
+    <value>С ответом</value>
+  </data>
+  <data name="qs.withImage" xml:space="preserve">
+    <value>С изображением</value>
+  </data>
+  <data name="qs.searchText" xml:space="preserve">
+    <value>Поиск по тексту вопроса...</value>
+  </data>
+  <data name="qs.searchId" xml:space="preserve">
+    <value>Поиск по ID...</value>
+  </data>
+  <data name="qs.list" xml:space="preserve">
+    <value>Список вопросов</value>
+  </data>
+  <data name="qs.totalBadge" xml:space="preserve">
+    <value>ВСЕГО {n}</value>
+  </data>
+  <data name="qs.colImage" xml:space="preserve">
+    <value>Изображение</value>
+  </data>
+  <data name="qs.colText" xml:space="preserve">
+    <value>Текст вопроса</value>
+  </data>
+  <data name="qs.colCorrect" xml:space="preserve">
+    <value>Правильный ответ</value>
+  </data>
+  <data name="qs.colLangs" xml:space="preserve">
+    <value>Языки</value>
+  </data>
+  <data name="qs.colActions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="qs.edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="qs.delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="qs.confirmDelete" xml:space="preserve">
+    <value>Вы действительно хотите удалить?</value>
+  </data>
+  <data name="qs.empty" xml:space="preserve">
+    <value>Ничего не найдено</value>
+  </data>
+  <data name="qs.pageInfo" xml:space="preserve">
+    <value>Показано:</value>
+  </data>
+  <data name="qs.prev" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="qs.next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="qs.missing" xml:space="preserve">
+    <value>Нет перевода — показывается узбекский (латиница)</value>
+  </data>
+  <data name="qs.saved" xml:space="preserve">
+    <value>Вопрос сохранён.</value>
+  </data>
+  <data name="qs.deleted" xml:space="preserve">
+    <value>Вопрос удалён.</value>
+  </data>
+  <data name="form.createPageTitle" xml:space="preserve">
+    <value>Добавление вопроса</value>
+  </data>
+  <data name="form.createTitle" xml:space="preserve">
+    <value>ДОБАВИТЬ &lt;span&gt;ВОПРОС&lt;/span&gt;</value>
+  </data>
+  <data name="form.editPageTitle" xml:space="preserve">
+    <value>Редактирование вопроса</value>
+  </data>
+  <data name="form.editTitle" xml:space="preserve">
+    <value>РЕДАКТИРОВАТЬ &lt;span&gt;ВОПРОС&lt;/span&gt;</value>
+  </data>
+  <data name="form.editEyebrow" xml:space="preserve">
+    <value>Панель администратора — Редактирование</value>
+  </data>
+  <data name="form.questionId" xml:space="preserve">
+    <value>ID вопроса:</value>
+  </data>
+  <data name="form.questionText" xml:space="preserve">
+    <value>Текст вопроса</value>
+  </data>
+  <data name="form.langUz" xml:space="preserve">
+    <value>Узбекский (латиница)</value>
+  </data>
+  <data name="form.langRu" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="form.langUzk" xml:space="preserve">
+    <value>Узбекский (кириллица)</value>
+  </data>
+  <data name="form.required" xml:space="preserve">
+    <value>обязательно</value>
+  </data>
+  <data name="form.optional" xml:space="preserve">
+    <value>необязательно</value>
+  </data>
+  <data name="form.topic" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="form.chooseTopic" xml:space="preserve">
+    <value>— Выберите тему —</value>
+  </data>
+  <data name="form.explanation" xml:space="preserve">
+    <value>Пояснение (необязательно)</value>
+  </data>
+  <data name="form.image" xml:space="preserve">
+    <value>Изображение</value>
+  </data>
+  <data name="form.imageOptional" xml:space="preserve">
+    <value>Изображение (необязательно)</value>
+  </data>
+  <data name="form.upload" xml:space="preserve">
+    <value>Загрузить изображение</value>
+  </data>
+  <data name="form.uploadNew" xml:space="preserve">
+    <value>Загрузить новое изображение</value>
+  </data>
+  <data name="form.uploadHint" xml:space="preserve">
+    <value>Нажмите или перетащите изображение сюда · PNG, JPG, WEBP</value>
+  </data>
+  <data name="form.currentImage" xml:space="preserve">
+    <value>Текущее изображение</value>
+  </data>
+  <data name="form.currentImageHint" xml:space="preserve">
+    <value>Нажмите ×, чтобы удалить изображение,&lt;br&gt;или загрузите новое ниже.</value>
+  </data>
+  <data name="form.orNew" xml:space="preserve">
+    <value>или загрузите новое изображение</value>
+  </data>
+  <data name="form.removeImage" xml:space="preserve">
+    <value>Удалить изображение</value>
+  </data>
+  <data name="form.options" xml:space="preserve">
+    <value>Варианты ответов</value>
+  </data>
+  <data name="form.addOption" xml:space="preserve">
+    <value>Добавить вариант</value>
+  </data>
+  <data name="form.correct" xml:space="preserve">
+    <value>Верный</value>
+  </data>
+  <data name="form.correctAnswer" xml:space="preserve">
+    <value>Правильный ответ</value>
+  </data>
+  <data name="form.delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="form.back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="form.save" xml:space="preserve">
+    <value>Сохранить вопрос</value>
+  </data>
+  <data name="form.saveChanges" xml:space="preserve">
+    <value>Сохранить изменения</value>
+  </data>
+  <data name="form.translit" xml:space="preserve">
+    <value>Из латиницы</value>
+  </data>
+  <data name="form.translitTitle" xml:space="preserve">
+    <value>Транслитерировать узбекский текст с латиницы на кириллицу</value>
+  </data>
+  <data name="form.translitAll" xml:space="preserve">
+    <value>Заполнить пустые поля кириллицы из латиницы</value>
+  </data>
+  <data name="form.translitHint" xml:space="preserve">
+    <value>Если поле кириллицы пустое, при сохранении оно заполнится автоматически из латиницы. Результат можно исправить вручную.</value>
+  </data>
+  <data name="form.translitDone" xml:space="preserve">
+    <value>Поля кириллицы заполнены — проверьте и при необходимости исправьте.</value>
+  </data>
+  <data name="form.translitOverwrite" xml:space="preserve">
+    <value>Поле кириллицы уже заполнено. Перезаписать транслитерацией из латиницы?</value>
+  </data>
+  <data name="form.translitEmpty" xml:space="preserve">
+    <value>Сначала введите текст на узбекском (латиница).</value>
+  </data>
+  <data name="form.phQuestionUz" xml:space="preserve">
+    <value>Savol matnini kiriting...</value>
+  </data>
+  <data name="form.phQuestionRu" xml:space="preserve">
+    <value>Введите вопрос...</value>
+  </data>
+  <data name="form.phQuestionUzk" xml:space="preserve">
+    <value>Савол матнини киритинг...</value>
+  </data>
+  <data name="form.phExplanationUz" xml:space="preserve">
+    <value>Izoh matni...</value>
+  </data>
+  <data name="form.phExplanationRu" xml:space="preserve">
+    <value>Пояснение...</value>
+  </data>
+  <data name="form.phExplanationUzk" xml:space="preserve">
+    <value>Изоҳ матни...</value>
+  </data>
+  <data name="err.correctRequired" xml:space="preserve">
+    <value>Необходимо отметить хотя бы 1 правильный ответ!</value>
+  </data>
+  <data name="err.questionUzRequired" xml:space="preserve">
+    <value>Текст вопроса на узбекском (латиница) обязателен!</value>
+  </data>
+  <data name="err.optionUzRequired" xml:space="preserve">
+    <value>Для каждого варианта обязателен текст на узбекском (латиница)!</value>
+  </data>
+  <data name="err.minOptions" xml:space="preserve">
+    <value>Введите не менее 2 вариантов ответа!</value>
+  </data>
+  <data name="err.pageTitle" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="err.generic" xml:space="preserve">
+    <value>При обработке запроса произошла ошибка.</value>
+  </data>
+  <data name="privacy.title" xml:space="preserve">
+    <value>Политика конфиденциальности</value>
+  </data>
+  <data name="nav.admin" xml:space="preserve">
+    <value>Админ-панель</value>
+  </data>
+  <data name="nav.logout" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="login.inactive" xml:space="preserve">
+    <value>Ваша учётная запись отключена. Обратитесь к администратору.</value>
+  </data>
+  <data name="auth.deniedTitle" xml:space="preserve">
+    <value>Доступ запрещён</value>
+  </data>
+  <data name="auth.deniedText" xml:space="preserve">
+    <value>Эта страница доступна только суперадминистратору.</value>
+  </data>
+  <data name="auth.toHome" xml:space="preserve">
+    <value>На главную</value>
+  </data>
+  <data name="admin.users" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="admin.toSite" xml:space="preserve">
+    <value>Перейти на сайт</value>
+  </data>
+  <data name="role.superadmin" xml:space="preserve">
+    <value>Суперадмин</value>
+  </data>
+  <data name="role.user" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="users.pageTitle" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="users.title" xml:space="preserve">
+    <value>ПОЛЬЗОВА&lt;span&gt;ТЕЛИ&lt;/span&gt;</value>
+  </data>
+  <data name="users.subtitle" xml:space="preserve">
+    <value>Управление пользователями, которые могут входить в систему</value>
+  </data>
+  <data name="users.new" xml:space="preserve">
+    <value>Новый пользователь</value>
+  </data>
+  <data name="users.createTitle" xml:space="preserve">
+    <value>Новый пользователь</value>
+  </data>
+  <data name="users.editTitle" xml:space="preserve">
+    <value>Редактирование пользователя</value>
+  </data>
+  <data name="users.username" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="users.usernameHint" xml:space="preserve">
+    <value>3–64 символа: латинские буквы, цифры, точка, _ и -</value>
+  </data>
+  <data name="users.fullName" xml:space="preserve">
+    <value>Полное имя</value>
+  </data>
+  <data name="users.role" xml:space="preserve">
+    <value>Роль</value>
+  </data>
+  <data name="users.roleHint" xml:space="preserve">
+    <value>Суперадмин управляет вопросами и пользователями. Пользователь — только проходит тесты.</value>
+  </data>
+  <data name="users.status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="users.active" xml:space="preserve">
+    <value>Активен</value>
+  </data>
+  <data name="users.inactive" xml:space="preserve">
+    <value>Отключён</value>
+  </data>
+  <data name="users.isActive" xml:space="preserve">
+    <value>Активен (может входить в систему)</value>
+  </data>
+  <data name="users.lastLogin" xml:space="preserve">
+    <value>Последний вход</value>
+  </data>
+  <data name="users.you" xml:space="preserve">
+    <value>(вы)</value>
+  </data>
+  <data name="users.password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="users.newPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="users.passwordHint" xml:space="preserve">
+    <value>Не менее 6 символов.</value>
+  </data>
+  <data name="users.keepPassword" xml:space="preserve">
+    <value>Оставьте пустым, чтобы не менять.</value>
+  </data>
+  <data name="users.confirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="users.save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="users.confirmDelete" xml:space="preserve">
+    <value>Удалить пользователя «{name}»?</value>
+  </data>
+  <data name="users.created" xml:space="preserve">
+    <value>Пользователь добавлен.</value>
+  </data>
+  <data name="users.updated" xml:space="preserve">
+    <value>Изменения сохранены.</value>
+  </data>
+  <data name="users.deleted" xml:space="preserve">
+    <value>Пользователь удалён.</value>
+  </data>
+  <data name="users.empty" xml:space="preserve">
+    <value>Пользователей нет</value>
+  </data>
+  <data name="err.usernameRequired" xml:space="preserve">
+    <value>Введите логин!</value>
+  </data>
+  <data name="err.usernameFormat" xml:space="preserve">
+    <value>Логин должен содержать 3–64 символа: латинские буквы, цифры, '.', '_' и '-'.</value>
+  </data>
+  <data name="err.usernameTaken" xml:space="preserve">
+    <value>Этот логин уже занят.</value>
+  </data>
+  <data name="err.passwordRequired" xml:space="preserve">
+    <value>Введите пароль!</value>
+  </data>
+  <data name="err.passwordShort" xml:space="preserve">
+    <value>Пароль должен содержать не менее 6 символов.</value>
+  </data>
+  <data name="err.passwordMismatch" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="err.roleInvalid" xml:space="preserve">
+    <value>Выбрана недопустимая роль.</value>
+  </data>
+  <data name="err.lastSuperadmin" xml:space="preserve">
+    <value>Должен остаться хотя бы один активный суперадминистратор.</value>
+  </data>
+  <data name="err.deleteSelf" xml:space="preserve">
+    <value>Нельзя удалить самого себя.</value>
+  </data>
+  <data name="err.deactivateSelf" xml:space="preserve">
+    <value>Нельзя отключить собственную учётную запись.</value>
+  </data>
+  <data name="err.userNotFound" xml:space="preserve">
+    <value>Пользователь не найден.</value>
+  </data>
+  <data name="topic.1" xml:space="preserve">
+    <value>Общие положения</value>
+  </data>
+  <data name="topic.2" xml:space="preserve">
+    <value>Общие обязанности водителей</value>
+  </data>
+  <data name="topic.3" xml:space="preserve">
+    <value>Общие обязанности пешеходов</value>
+  </data>
+  <data name="topic.4" xml:space="preserve">
+    <value>Приоритет специальных транспортных средств</value>
+  </data>
+  <data name="topic.5" xml:space="preserve">
+    <value>Предупреждающие знаки</value>
+  </data>
+  <data name="topic.6" xml:space="preserve">
+    <value>Знаки приоритета</value>
+  </data>
+  <data name="topic.7" xml:space="preserve">
+    <value>Запрещающие знаки</value>
+  </data>
+  <data name="topic.8" xml:space="preserve">
+    <value>Предписывающие знаки</value>
+  </data>
+  <data name="topic.9" xml:space="preserve">
+    <value>Информационно-указательные знаки</value>
+  </data>
+  <data name="topic.10" xml:space="preserve">
+    <value>Знаки сервиса</value>
+  </data>
+  <data name="topic.11" xml:space="preserve">
+    <value>Знаки дополнительной информации</value>
+  </data>
+  <data name="topic.12" xml:space="preserve">
+    <value>Горизонтальная разметка</value>
+  </data>
+  <data name="topic.13" xml:space="preserve">
+    <value>Вертикальная разметка</value>
+  </data>
+  <data name="topic.14" xml:space="preserve">
+    <value>Сигналы светофора</value>
+  </data>
+  <data name="topic.15" xml:space="preserve">
+    <value>Сигналы регулировщика</value>
+  </data>
+  <data name="topic.16" xml:space="preserve">
+    <value>Предупредительные и аварийные сигналы</value>
+  </data>
+  <data name="topic.17" xml:space="preserve">
+    <value>Начало движения, маневрирование</value>
+  </data>
+  <data name="topic.18" xml:space="preserve">
+    <value>Расположение транспортных средств на проезжей части</value>
+  </data>
+  <data name="topic.19" xml:space="preserve">
+    <value>Скорость движения</value>
+  </data>
+  <data name="topic.20" xml:space="preserve">
+    <value>Обгон</value>
+  </data>
+  <data name="topic.21" xml:space="preserve">
+    <value>Остановка и стоянка</value>
+  </data>
+  <data name="topic.22" xml:space="preserve">
+    <value>Проезд перекрёстков</value>
+  </data>
+  <data name="topic.23" xml:space="preserve">
+    <value>Регулируемые перекрёстки</value>
+  </data>
+  <data name="topic.24" xml:space="preserve">
+    <value>Нерегулируемые перекрёстки: главная дорога прямо</value>
+  </data>
+  <data name="topic.25" xml:space="preserve">
+    <value>Нерегулируемые перекрёстки равнозначных дорог</value>
+  </data>
+  <data name="topic.26" xml:space="preserve">
+    <value>Нерегулируемые перекрёстки: главная дорога меняет направление</value>
+  </data>
+  <data name="topic.27" xml:space="preserve">
+    <value>Пешеходные переходы и остановки маршрутных транспортных средств</value>
+  </data>
+  <data name="topic.28" xml:space="preserve">
+    <value>Движение через железнодорожные переезды</value>
+  </data>
+  <data name="topic.29" xml:space="preserve">
+    <value>Движение по автомагистралям</value>
+  </data>
+  <data name="topic.30" xml:space="preserve">
+    <value>Движение в жилых зонах</value>
+  </data>
+  <data name="topic.31" xml:space="preserve">
+    <value>Движение на крутых подъёмах и спусках</value>
+  </data>
+  <data name="topic.32" xml:space="preserve">
+    <value>Приоритет маршрутных транспортных средств</value>
+  </data>
+  <data name="topic.33" xml:space="preserve">
+    <value>Пользование внешними световыми приборами</value>
+  </data>
+  <data name="topic.34" xml:space="preserve">
+    <value>Буксировка механических транспортных средств</value>
+  </data>
+  <data name="topic.35" xml:space="preserve">
+    <value>Учебная езда</value>
+  </data>
+  <data name="topic.36" xml:space="preserve">
+    <value>Перевозка людей</value>
+  </data>
+  <data name="topic.37" xml:space="preserve">
+    <value>Перевозка грузов</value>
+  </data>
+  <data name="topic.38" xml:space="preserve">
+    <value>Дополнительные требования к движению велосипедов, мопедов, гужевых повозок, а также прогону животных</value>
+  </data>
+  <data name="topic.39" xml:space="preserve">
+    <value>Обязанности должностных лиц и граждан по обеспечению безопасности дорожного движения, выпуску транспортных средств на дорогу, установке номерных и опознавательных знаков</value>
+  </data>
+  <data name="topic.40" xml:space="preserve">
+    <value>Условия, запрещающие эксплуатацию транспортных средств</value>
+  </data>
+  <data name="topic.41" xml:space="preserve">
+    <value>Основы безопасности движения</value>
+  </data>
+  <data name="topic.42" xml:space="preserve">
+    <value>Первая медицинская помощь</value>
+  </data>
+  <data name="tracker.saved" xml:space="preserve">
+    <value>Результат сохранён в личном кабинете</value>
+  </data>
+  <data name="tracker.failed" xml:space="preserve">
+    <value>Не удалось сохранить результат</value>
+  </data>
+  <data name="nav.cabinet" xml:space="preserve">
+    <value>Кабинет</value>
+  </data>
+  <data name="nav.tests" xml:space="preserve">
+    <value>Тесты</value>
+  </data>
+  <data name="nav.myCabinet" xml:space="preserve">
+    <value>Личный кабинет</value>
+  </data>
+  <data name="nav.language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="nav.menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="lang.current" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="lang.code" xml:space="preserve">
+    <value>RU</value>
+  </data>
+  <data name="login.welcome" xml:space="preserve">
+    <value>Добро пожаловать!</value>
+  </data>
+  <data name="login.subtitle" xml:space="preserve">
+    <value>Войдите в аккаунт и продолжите подготовку</value>
+  </data>
+  <data name="login.brandTitle" xml:space="preserve">
+    <value>Готовьтесь к экзамену&lt;br&gt;на права уверенно</value>
+  </data>
+  <data name="login.brandText" xml:space="preserve">
+    <value>Тесты в формате реального экзамена, работа над ошибками и персональная аналитика — всё в одном месте.</value>
+  </data>
+  <data name="login.feature1" xml:space="preserve">
+    <value>1350+ официальных экзаменационных вопросов</value>
+  </data>
+  <data name="login.feature2" xml:space="preserve">
+    <value>Работа над ошибками и AI-анализ</value>
+  </data>
+  <data name="login.feature3" xml:space="preserve">
+    <value>Прогноз готовности к экзамену</value>
+  </data>
+  <data name="login.showPassword" xml:space="preserve">
+    <value>Показать пароль</value>
+  </data>
+  <data name="login.hidePassword" xml:space="preserve">
+    <value>Скрыть пароль</value>
+  </data>
+  <data name="login.usernamePh" xml:space="preserve">
+    <value>Введите логин</value>
+  </data>
+  <data name="login.passwordPh" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="login.help" xml:space="preserve">
+    <value>Логин и пароль выдаёт администратор учебного центра.</value>
+  </data>
+  <data name="login.signingIn" xml:space="preserve">
+    <value>Вход...</value>
+  </data>
+  <data name="login.capsLock" xml:space="preserve">
+    <value>Включён Caps Lock</value>
+  </data>
+  <data name="cab.pageTitle" xml:space="preserve">
+    <value>Личный кабинет</value>
+  </data>
+  <data name="cab.overview" xml:space="preserve">
+    <value>Обзор</value>
+  </data>
+  <data name="cab.results" xml:space="preserve">
+    <value>Результаты</value>
+  </data>
+  <data name="cab.mistakes" xml:space="preserve">
+    <value>Мои ошибки</value>
+  </data>
+  <data name="cab.analysis" xml:space="preserve">
+    <value>Анализ</value>
+  </data>
+  <data name="cab.startTest" xml:space="preserve">
+    <value>Пройти тест</value>
+  </data>
+  <data name="cab.hello" xml:space="preserve">
+    <value>Здравствуйте, {name}!</value>
+  </data>
+  <data name="cab.helloSub" xml:space="preserve">
+    <value>Готовы к сегодняшней тренировке?</value>
+  </data>
+  <data name="cab.readiness" xml:space="preserve">
+    <value>Готовность к экзамену</value>
+  </data>
+  <data name="cab.avgResult" xml:space="preserve">
+    <value>Средний результат</value>
+  </data>
+  <data name="cab.testsTaken" xml:space="preserve">
+    <value>Пройдено тестов</value>
+  </data>
+  <data name="cab.answered" xml:space="preserve">
+    <value>Отвечено вопросов</value>
+  </data>
+  <data name="cab.activeMistakes" xml:space="preserve">
+    <value>Активные ошибки</value>
+  </data>
+  <data name="cab.studyTime" xml:space="preserve">
+    <value>Время занятий</value>
+  </data>
+  <data name="cab.minutes" xml:space="preserve">
+    <value>{n} мин</value>
+  </data>
+  <data name="cab.hoursMinutes" xml:space="preserve">
+    <value>{h} ч {m} мин</value>
+  </data>
+  <data name="cab.streak" xml:space="preserve">
+    <value>Дней подряд</value>
+  </data>
+  <data name="cab.readyTitle" xml:space="preserve">
+    <value>Вы готовы к экзамену! 🎉</value>
+  </data>
+  <data name="cab.readyText" xml:space="preserve">
+    <value>Вы верно решили все вопросы базы. Чтобы держать форму, решайте один реальный экзамен в день.</value>
+  </data>
+  <data name="cab.forecastTitle" xml:space="preserve">
+    <value>Ожидаемая дата готовности</value>
+  </data>
+  <data name="cab.forecastDays" xml:space="preserve">
+    <value>через {n} дн.</value>
+  </data>
+  <data name="cab.forecastNoData" xml:space="preserve">
+    <value>Для прогноза ответьте ещё минимум на {n} вопросов</value>
+  </data>
+  <data name="cab.forecastUnknown" xml:space="preserve">
+    <value>При текущем темпе прогноз невозможен — занимайтесь ежедневно</value>
+  </data>
+  <data name="cab.progress" xml:space="preserve">
+    <value>Прогресс (30 дней)</value>
+  </data>
+  <data name="cab.progressHint" xml:space="preserve">
+    <value>Доля правильных ответов по дням</value>
+  </data>
+  <data name="cab.noActivity" xml:space="preserve">
+    <value>Пока нет активности</value>
+  </data>
+  <data name="cab.byType" xml:space="preserve">
+    <value>По типам тестов</value>
+  </data>
+  <data name="cab.colTest" xml:space="preserve">
+    <value>Тест</value>
+  </data>
+  <data name="cab.colAttempts" xml:space="preserve">
+    <value>Попыток</value>
+  </data>
+  <data name="cab.colAvg" xml:space="preserve">
+    <value>Среднее</value>
+  </data>
+  <data name="cab.colBest" xml:space="preserve">
+    <value>Лучший</value>
+  </data>
+  <data name="cab.colPassed" xml:space="preserve">
+    <value>Сдано</value>
+  </data>
+  <data name="cab.colLast" xml:space="preserve">
+    <value>Последний</value>
+  </data>
+  <data name="cab.colDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="cab.colResult" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="cab.colStatus" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="cab.passed" xml:space="preserve">
+    <value>Сдал</value>
+  </data>
+  <data name="cab.failed" xml:space="preserve">
+    <value>Не сдал</value>
+  </data>
+  <data name="cab.recent" xml:space="preserve">
+    <value>Последние попытки</value>
+  </data>
+  <data name="cab.viewAll" xml:space="preserve">
+    <value>Смотреть все</value>
+  </data>
+  <data name="cab.details" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="cab.weakTopics" xml:space="preserve">
+    <value>Темы, требующие внимания</value>
+  </data>
+  <data name="cab.practiceTopic" xml:space="preserve">
+    <value>Тренировать</value>
+  </data>
+  <data name="cab.noWeakTopics" xml:space="preserve">
+    <value>Слабых тем не выявлено 👍</value>
+  </data>
+  <data name="cab.empty" xml:space="preserve">
+    <value>Вы ещё не прошли ни одного теста</value>
+  </data>
+  <data name="cab.emptyText" xml:space="preserve">
+    <value>Пройдите первый тест — здесь появятся результаты, ошибки и анализ.</value>
+  </data>
+  <data name="cab.fixMistakes" xml:space="preserve">
+    <value>Исправить ошибки</value>
+  </data>
+  <data name="cab.mistakesTitle" xml:space="preserve">
+    <value>Вопросы с ошибками</value>
+  </data>
+  <data name="cab.mistakesSub" xml:space="preserve">
+    <value>Вопрос исчезает из списка, как только вы ответите на него правильно.</value>
+  </data>
+  <data name="cab.mistakesResolved" xml:space="preserve">
+    <value>Исправлено ошибок: {n}</value>
+  </data>
+  <data name="cab.noMistakes" xml:space="preserve">
+    <value>Активных ошибок нет — отлично! 🎯</value>
+  </data>
+  <data name="cab.wrongTimes" xml:space="preserve">
+    <value>Ошибок: {n}</value>
+  </data>
+  <data name="cab.lastWrong" xml:space="preserve">
+    <value>Последняя ошибка</value>
+  </data>
+  <data name="cab.correctAnswer" xml:space="preserve">
+    <value>Правильный ответ</value>
+  </data>
+  <data name="cab.yourAnswer" xml:space="preserve">
+    <value>Ваш ответ</value>
+  </data>
+  <data name="cab.noAnswer" xml:space="preserve">
+    <value>Нет ответа</value>
+  </data>
+  <data name="cab.attemptTitle" xml:space="preserve">
+    <value>Детали попытки</value>
+  </data>
+  <data name="cab.backToResults" xml:space="preserve">
+    <value>Назад к результатам</value>
+  </data>
+  <data name="cab.filterAll" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="cab.readinessBreakdown" xml:space="preserve">
+    <value>Из чего складывается готовность</value>
+  </data>
+  <data name="cab.factorAccuracy" xml:space="preserve">
+    <value>Точность (последние 200 ответов)</value>
+  </data>
+  <data name="cab.factorExams" xml:space="preserve">
+    <value>Экзаменационные тесты (последние 5)</value>
+  </data>
+  <data name="cab.factorCoverage" xml:space="preserve">
+    <value>Охват базы вопросов</value>
+  </data>
+  <data name="cab.factorTarget" xml:space="preserve">
+    <value>Цель: {n}%</value>
+  </data>
+  <data name="cab.topicsTitle" xml:space="preserve">
+    <value>Результаты по темам</value>
+  </data>
+  <data name="cab.colTopic" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="cab.colAnswered" xml:space="preserve">
+    <value>Ответов</value>
+  </data>
+  <data name="cab.colAccuracy" xml:space="preserve">
+    <value>Точность</value>
+  </data>
+  <data name="cab.notPracticed" xml:space="preserve">
+    <value>Не решались</value>
+  </data>
+  <data name="cab.insights" xml:space="preserve">
+    <value>Рекомендации</value>
+  </data>
+  <data name="cab.aiTitle" xml:space="preserve">
+    <value>AI-анализ</value>
+  </data>
+  <data name="cab.aiButton" xml:space="preserve">
+    <value>Получить AI-анализ</value>
+  </data>
+  <data name="cab.aiLoading" xml:space="preserve">
+    <value>AI анализирует ваши результаты...</value>
+  </data>
+  <data name="cab.aiError" xml:space="preserve">
+    <value>Не удалось получить AI-анализ. Попробуйте позже.</value>
+  </data>
+  <data name="cab.aiDisabled" xml:space="preserve">
+    <value>AI-анализ ещё не настроен — ниже показаны рекомендации встроенного анализа.</value>
+  </data>
+  <data name="cab.aiHint" xml:space="preserve">
+    <value>Персональные рекомендации на основе ваших результатов (Claude AI).</value>
+  </data>
+  <data name="insight.start" xml:space="preserve">
+    <value>Пройдите первый тест — после этого появится персональный анализ.</value>
+  </data>
+  <data name="insight.needData" xml:space="preserve">
+    <value>Для точного прогноза ответьте ещё минимум на {n} вопросов.</value>
+  </data>
+  <data name="insight.ready" xml:space="preserve">
+    <value>Вы готовы к экзамену: точность выше 90%, последние экзаменационные тесты сданы.</value>
+  </data>
+  <data name="insight.forecast" xml:space="preserve">
+    <value>При сохранении темпа вы будете готовы примерно через {days} дн. ({date}).</value>
+  </data>
+  <data name="insight.noForecast" xml:space="preserve">
+    <value>Результаты пока не растут — решайте минимум 40 вопросов в день и разбирайте ошибки.</value>
+  </data>
+  <data name="insight.improving" xml:space="preserve">
+    <value>За последние 100 ответов точность выросла на {n} п.п. — так держать!</value>
+  </data>
+  <data name="insight.declining" xml:space="preserve">
+    <value>За последние 100 ответов точность снизилась на {n} п.п. — повторите правила.</value>
+  </data>
+  <data name="insight.weakTopics" xml:space="preserve">
+    <value>Самые слабые темы: {topics}. Потренируйтесь по ним отдельно.</value>
+  </data>
+  <data name="insight.untouched" xml:space="preserve">
+    <value>Тем, которые ещё не решались: {n} — займитесь и ими.</value>
+  </data>
+  <data name="insight.mistakes" xml:space="preserve">
+    <value>Активных ошибок: {n} — закройте их через «Исправить ошибки».</value>
+  </data>
+  <data name="insight.examPractice" xml:space="preserve">
+    <value>Пройдите минимум 3 реальных экзамена — это уточнит оценку готовности.</value>
+  </data>
+  <data name="insight.examLow" xml:space="preserve">
+    <value>Сдано лишь {n}% последних экзаменационных тестов. Для сдачи нужно 18 правильных из 20.</value>
+  </data>
+  <data name="insight.coverage" xml:space="preserve">
+    <value>Правильно решено {n}% базы вопросов — увеличьте охват в режиме марафона.</value>
+  </data>
+  <data name="insight.inactive" xml:space="preserve">
+    <value>Вы не занимались {n} дн. — знания быстро забываются.</value>
+  </data>
+  <data name="insight.streak" xml:space="preserve">
+    <value>Вы занимаетесь {n} дн. подряд — отличная привычка!</value>
+  </data>
+  <data name="testType.real" xml:space="preserve">
+    <value>Реальный экзамен</value>
+  </data>
+  <data name="testType.q20" xml:space="preserve">
+    <value>20 вопросов</value>
+  </data>
+  <data name="testType.q40" xml:space="preserve">
+    <value>40 вопросов</value>
+  </data>
+  <data name="testType.q80" xml:space="preserve">
+    <value>80 вопросов</value>
+  </data>
+  <data name="testType.q100" xml:space="preserve">
+    <value>100 вопросов</value>
+  </data>
+  <data name="testType.q200" xml:space="preserve">
+    <value>200 вопросов</value>
+  </data>
+  <data name="testType.marathon" xml:space="preserve">
+    <value>Марафон</value>
+  </data>
+  <data name="testType.bilet" xml:space="preserve">
+    <value>Билет</value>
+  </data>
+  <data name="testType.topic" xml:space="preserve">
+    <value>По теме</value>
+  </data>
+  <data name="testType.mistakes" xml:space="preserve">
+    <value>Работа над ошибками</value>
+  </data>
+  <data name="admin.analytics" xml:space="preserve">
+    <value>Аналитика</value>
+  </data>
+  <data name="an.pageTitle" xml:space="preserve">
+    <value>Аналитика и результаты</value>
+  </data>
+  <data name="an.title" xml:space="preserve">
+    <value>АНАЛИТИКА &lt;span&gt;И РЕЗУЛЬТАТЫ&lt;/span&gt;</value>
+  </data>
+  <data name="an.subtitle" xml:space="preserve">
+    <value>Результаты всех учеников, готовность и самые сложные вопросы</value>
+  </data>
+  <data name="an.students" xml:space="preserve">
+    <value>Ученики</value>
+  </data>
+  <data name="an.active7d" xml:space="preserve">
+    <value>Активны за 7 дней</value>
+  </data>
+  <data name="an.attempts" xml:space="preserve">
+    <value>Тестов</value>
+  </data>
+  <data name="an.attempts7d" xml:space="preserve">
+    <value>Тестов за 7 дней</value>
+  </data>
+  <data name="an.accuracy" xml:space="preserve">
+    <value>Общая точность</value>
+  </data>
+  <data name="an.examPass" xml:space="preserve">
+    <value>Сдача экзамена</value>
+  </data>
+  <data name="an.readyCount" xml:space="preserve">
+    <value>Готовы к экзамену</value>
+  </data>
+  <data name="an.colStudent" xml:space="preserve">
+    <value>Ученик</value>
+  </data>
+  <data name="an.colReadiness" xml:space="preserve">
+    <value>Готовность</value>
+  </data>
+  <data name="an.colLastActive" xml:space="preserve">
+    <value>Последняя активность</value>
+  </data>
+  <data name="an.colMistakes" xml:space="preserve">
+    <value>Ошибки</value>
+  </data>
+  <data name="an.open" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="an.noStudents" xml:space="preserve">
+    <value>Учеников пока нет</value>
+  </data>
+  <data name="an.hardQuestions" xml:space="preserve">
+    <value>Самые сложные вопросы</value>
+  </data>
+  <data name="an.colWrongRate" xml:space="preserve">
+    <value>Доля ошибок</value>
+  </data>
+  <data name="an.hardTopics" xml:space="preserve">
+    <value>Точность по темам</value>
+  </data>
+  <data name="an.search" xml:space="preserve">
+    <value>Поиск ученика...</value>
+  </data>
+  <data name="an.backToList" xml:space="preserve">
+    <value>Все ученики</value>
+  </data>
+  <data name="an.studentNote" xml:space="preserve">
+    <value>Здесь показано всё, что ученик видит в своём личном кабинете.</value>
+  </data>
+  <data name="an.readyBadge" xml:space="preserve">
+    <value>Готов</value>
+  </data>
+  <data name="an.noData" xml:space="preserve">
+    <value>Недостаточно данных</value>
+  </data>
+  <data name="an.noAnswers" xml:space="preserve">
+    <value>Пока нет ответов</value>
+  </data>
+  <data name="common.close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="login.expired" xml:space="preserve">
+    <value>Срок вашего доступа истёк. Для продления обратитесь к администратору.</value>
+  </data>
+  <data name="login.devicePending" xml:space="preserve">
+    <value>Этот аккаунт привязан к другому устройству. Администратору отправлен запрос — после подтверждения войдите снова с этого устройства.</value>
+  </data>
+  <data name="users.search" xml:space="preserve">
+    <value>Поиск по логину или имени...</value>
+  </data>
+  <data name="users.fAll" xml:space="preserve">
+    <value>Все статусы</value>
+  </data>
+  <data name="users.fActive" xml:space="preserve">
+    <value>Активные</value>
+  </data>
+  <data name="users.fInactive" xml:space="preserve">
+    <value>Неактивные</value>
+  </data>
+  <data name="users.fExpired" xml:space="preserve">
+    <value>Срок истёк</value>
+  </data>
+  <data name="users.fSoon" xml:space="preserve">
+    <value>Осталось меньше 7 дней</value>
+  </data>
+  <data name="users.fUnlimited" xml:space="preserve">
+    <value>Бессрочные</value>
+  </data>
+  <data name="users.fPending" xml:space="preserve">
+    <value>Есть запрос устройства</value>
+  </data>
+  <data name="users.fNoDevice" xml:space="preserve">
+    <value>Устройство не привязано</value>
+  </data>
+  <data name="users.fAllRoles" xml:space="preserve">
+    <value>Все роли</value>
+  </data>
+  <data name="users.found" xml:space="preserve">
+    <value>{n} из {total} пользователей</value>
+  </data>
+  <data name="users.noMatch" xml:space="preserve">
+    <value>По запросу пользователи не найдены</value>
+  </data>
+  <data name="users.access" xml:space="preserve">
+    <value>Срок доступа</value>
+  </data>
+  <data name="users.device" xml:space="preserve">
+    <value>Устройство</value>
+  </data>
+  <data name="users.unlimited" xml:space="preserve">
+    <value>Бессрочно</value>
+  </data>
+  <data name="users.expired" xml:space="preserve">
+    <value>Срок истёк</value>
+  </data>
+  <data name="users.daysLeft" xml:space="preserve">
+    <value>осталось дней: {n}</value>
+  </data>
+  <data name="users.noDevice" xml:space="preserve">
+    <value>Ещё не входил</value>
+  </data>
+  <data name="users.noDeviceLong" xml:space="preserve">
+    <value>Устройство не привязано — пользователь будет привязан к устройству, с которого войдёт в следующий раз.</value>
+  </data>
+  <data name="users.pendingDevice" xml:space="preserve">
+    <value>Запрос нового устройства</value>
+  </data>
+  <data name="users.currentAccess" xml:space="preserve">
+    <value>Текущий срок</value>
+  </data>
+  <data name="users.accessKeep" xml:space="preserve">
+    <value>Не менять</value>
+  </data>
+  <data name="users.accessSet" xml:space="preserve">
+    <value>Задать срок</value>
+  </data>
+  <data name="users.nDays" xml:space="preserve">
+    <value>{n} дн.</value>
+  </data>
+  <data name="users.nMonths" xml:space="preserve">
+    <value>{n} мес.</value>
+  </data>
+  <data name="users.unitDays" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="users.unitMonths" xml:space="preserve">
+    <value>месяцев</value>
+  </data>
+  <data name="users.until" xml:space="preserve">
+    <value>до {date}</value>
+  </data>
+  <data name="users.accessHint" xml:space="preserve">
+    <value>Отсчёт с текущего момента: от 1 до 365 дней или от 1 до 12 месяцев.</value>
+  </data>
+  <data name="users.unlimitedHint" xml:space="preserve">
+    <value>Пользователь может входить без ограничения по сроку.</value>
+  </data>
+  <data name="users.adminNoLimits" xml:space="preserve">
+    <value>Для супер-админа срок доступа и ограничение одного устройства не применяются.</value>
+  </data>
+  <data name="users.boundAt" xml:space="preserve">
+    <value>Привязано</value>
+  </data>
+  <data name="users.resetDevice" xml:space="preserve">
+    <value>Отвязать устройство</value>
+  </data>
+  <data name="users.resetDeviceConfirm" xml:space="preserve">
+    <value>Отвязать устройство? Пользователь будет привязан к устройству, с которого войдёт в следующий раз.</value>
+  </data>
+  <data name="users.deviceHint" xml:space="preserve">
+    <value>Каждый пользователь может входить только с одного устройства. Для входа с другого нужно ваше подтверждение.</value>
+  </data>
+  <data name="err.accessRange" xml:space="preserve">
+    <value>Срок должен быть от 1 до 365 дней или от 1 до 12 месяцев</value>
+  </data>
+  <data name="dev.title" xml:space="preserve">
+    <value>Запросы устройств</value>
+  </data>
+  <data name="dev.subtitle" xml:space="preserve">
+    <value>Когда пользователь пытается войти с другого устройства, запрос появляется здесь</value>
+  </data>
+  <data name="dev.pending" xml:space="preserve">
+    <value>Ожидают решения</value>
+  </data>
+  <data name="dev.none" xml:space="preserve">
+    <value>Новых запросов нет</value>
+  </data>
+  <data name="dev.oldDevice" xml:space="preserve">
+    <value>Текущее устройство</value>
+  </data>
+  <data name="dev.newDevice" xml:space="preserve">
+    <value>Новое устройство</value>
+  </data>
+  <data name="dev.approve" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="dev.reject" xml:space="preserve">
+    <value>Отклонить</value>
+  </data>
+  <data name="dev.approveHint" xml:space="preserve">
+    <value>После подтверждения пользователь переводится на новое устройство, а сеанс на старом завершается.</value>
+  </data>
+  <data name="dev.history" xml:space="preserve">
+    <value>Последние решения</value>
+  </data>
+  <data name="dev.requested" xml:space="preserve">
+    <value>Запрошено</value>
+  </data>
+  <data name="dev.resolved" xml:space="preserve">
+    <value>Решено</value>
+  </data>
+  <data name="dev.stApproved" xml:space="preserve">
+    <value>Подтверждён</value>
+  </data>
+  <data name="dev.stRejected" xml:space="preserve">
+    <value>Отклонён</value>
+  </data>
+  <data name="dev.approved" xml:space="preserve">
+    <value>Запрос подтверждён — пользователь теперь может войти с нового устройства</value>
+  </data>
+  <data name="dev.rejected" xml:space="preserve">
+    <value>Запрос отклонён</value>
+  </data>
+  <data name="dev.notFound" xml:space="preserve">
+    <value>Запрос не найден или уже обработан</value>
+  </data>
+  <data name="dev.resetDone" xml:space="preserve">
+    <value>Устройство отвязано</value>
+  </data>
+  <data name="dev.toast" xml:space="preserve">
+    <value>Новый запрос устройства — нажмите, чтобы посмотреть</value>
+  </data>
+  <data name="users.soonTitle" xml:space="preserve">
+    <value>Срок скоро истекает</value>
+  </data>
+  <data name="users.soonSub" xml:space="preserve">
+    <value>Доступ закончится в течение 7 дней</value>
+  </data>
+  <data name="users.expiredTitle" xml:space="preserve">
+    <value>Срок истёк</value>
+  </data>
+  <data name="users.expiredSub" xml:space="preserve">
+    <value>Не могут войти, пока срок не продлён</value>
+  </data>
+  <data name="users.extend" xml:space="preserve">
+    <value>Продлить</value>
+  </data>
+  <data name="err.imageType" xml:space="preserve">
+    <value>Можно загрузить только изображение (JPG, PNG, WEBP, GIF, BMP)</value>
+  </data>
+  <data name="sq.title" xml:space="preserve">
+    <value>Поиск вопроса</value>
+  </data>
+  <data name="sq.short" xml:space="preserve">
+    <value>Поиск вопроса</value>
+  </data>
+  <data name="sq.subtitle" xml:space="preserve">
+    <value>Введите несколько слов из вопроса — найдите нужный и решите его отдельно. Можно писать латиницей, кириллицей или по-русски.</value>
+  </data>
+  <data name="sq.placeholder" xml:space="preserve">
+    <value>Введите текст вопроса... например: кто первым проезжает перекрёсток</value>
+  </data>
+  <data name="sq.clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="sq.kbdHint" xml:space="preserve">
+    <value>Перейти к поиску: клавиша /</value>
+  </data>
+  <data name="sq.try" xml:space="preserve">
+    <value>Например:</value>
+  </data>
+  <data name="sq.ex1" xml:space="preserve">
+    <value>светофор</value>
+  </data>
+  <data name="sq.ex2" xml:space="preserve">
+    <value>обгон</value>
+  </data>
+  <data name="sq.ex3" xml:space="preserve">
+    <value>пешеход</value>
+  </data>
+  <data name="sq.ex4" xml:space="preserve">
+    <value>буксировка</value>
+  </data>
+  <data name="sq.ex5" xml:space="preserve">
+    <value>железнодорожный переезд</value>
+  </data>
+  <data name="sq.found" xml:space="preserve">
+    <value>Найдено вопросов: {n}</value>
+  </data>
+  <data name="sq.foundMore" xml:space="preserve">
+    <value>Найдено вопросов: {n} — показаны {shown} самых подходящих. Уточните запрос.</value>
+  </data>
+  <data name="sq.tooShort" xml:space="preserve">
+    <value>Введите хотя бы 2 буквы</value>
+  </data>
+  <data name="sq.startTitle" xml:space="preserve">
+    <value>Какой вопрос вы ищете?</value>
+  </data>
+  <data name="sq.startText" xml:space="preserve">
+    <value>Введите слова, которые помните из вопроса. Можно ввести и номер вопроса, например: #125</value>
+  </data>
+  <data name="sq.emptyTitle" xml:space="preserve">
+    <value>Ничего не найдено</value>
+  </data>
+  <data name="sq.emptyText" xml:space="preserve">
+    <value>Попробуйте другие слова или более короткий запрос.</value>
+  </data>
+  <data name="sq.errorTitle" xml:space="preserve">
+    <value>Ошибка поиска</value>
+  </data>
+  <data name="sq.errorText" xml:space="preserve">
+    <value>Проверьте подключение к интернету и попробуйте снова.</value>
+  </data>
+  <data name="sq.inMistakes" xml:space="preserve">
+    <value>В моих ошибках</value>
+  </data>
+  <data name="sq.inAnswer" xml:space="preserve">
+    <value>В ответе:</value>
+  </data>
+  <data name="sq.solve" xml:space="preserve">
+    <value>Решить</value>
+  </data>
+  <data name="testType.search" xml:space="preserve">
+    <value>Поиск вопроса</value>
+  </data>
+  <data name="sq.back" xml:space="preserve">
+    <value>← Назад к поиску</value>
+  </data>
+  <data name="sq.backShort" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="sq.solveAll" xml:space="preserve">
+    <value>Решить все как тест</value>
+  </data>
+  <data name="cab.limitCoverage" xml:space="preserve">
+    <value>Чтобы быть готовым к экзамену, нужно верно решить все {total} вопросов базы — осталось {n} (текущий темп — ~{pace} новых вопросов в день). Чем больше новых вопросов, тем ближе дата.</value>
+  </data>
+  <data name="cab.limitAccuracy" xml:space="preserve">
+    <value>Дату в основном определяет точность: доля правильных ответов в последних ответах должна достичь 90%.</value>
+  </data>
+  <data name="cab.limitExams" xml:space="preserve">
+    <value>Вы почти готовы — осталось сдать 3 экзаменационных теста (20 вопросов) подряд.</value>
+  </data>
+  <data name="hm.lead" xml:space="preserve">
+    <value>Выберите вид экзамена и начните тренировку. Нужный вопрос можно найти здесь по его тексту.</value>
+  </data>
+  <data name="hm.searchPlaceholder" xml:space="preserve">
+    <value>Введите текст вопроса... например: светофор</value>
+  </data>
+  <data name="hm.searchBtn" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="hm.searchHint" xml:space="preserve">
+    <value>Можно писать латиницей, кириллицей или по-русски. Можно искать и по номеру вопроса: #125</value>
+  </data>
+  <data name="hm.allResults" xml:space="preserve">
+    <value>Все результаты ({n})</value>
+  </data>
+  <data name="hm.examBadge" xml:space="preserve">
+    <value>Режим экзамена</value>
+  </data>
+  <data name="hm.examDesc" xml:space="preserve">
+    <value>Как на настоящем экзамене: 20 случайных вопросов из базы. Проверьте себя — результат сохранится в кабинете.</value>
+  </data>
+  <data name="hm.examFact1" xml:space="preserve">
+    <value>20 вопросов</value>
+  </data>
+  <data name="hm.examFact2" xml:space="preserve">
+    <value>Проходной: 18 правильных (90%)</value>
+  </data>
+  <data name="hm.examFact3" xml:space="preserve">
+    <value>Результат сохраняется в кабинете</value>
+  </data>
+  <data name="hm.examStart" xml:space="preserve">
+    <value>Начать экзамен</value>
+  </data>
+  <data name="hm.practiceTitle" xml:space="preserve">
+    <value>Тренировочные тесты</value>
+  </data>
+  <data name="hm.practiceSub" xml:space="preserve">
+    <value>Вопросы выбираются из базы случайно — каждый раз новый набор</value>
+  </data>
+  <data name="hm.questions" xml:space="preserve">
+    <value>вопросов</value>
+  </data>
+  <data name="hm.lvl1" xml:space="preserve">
+    <value>Быстрый</value>
+  </data>
+  <data name="hm.lvl2" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="hm.lvl3" xml:space="preserve">
+    <value>Углублённый</value>
+  </data>
+  <data name="hm.lvl4" xml:space="preserve">
+    <value>Большой тест</value>
+  </data>
+  <data name="hm.lvl5" xml:space="preserve">
+    <value>Самый большой тест</value>
+  </data>
+  <data name="hm.modesTitle" xml:space="preserve">
+    <value>Другие виды экзамена</value>
+  </data>
+  <data name="hm.modesSub" xml:space="preserve">
+    <value>Тренировка по билетам или по всей базе</value>
+  </data>
+  <data name="hm.biletsDesc" xml:space="preserve">
+    <value>{n} билетов по 20 вопросов — решайте по порядку.</value>
+  </data>
+  <data name="hm.topicsDesc" xml:space="preserve">
+    <value>{n} тем — выберите нужную и решайте только её вопросы.</value>
+  </data>
+  <data name="hm.marathonDesc" xml:space="preserve">
+    <value>Все {n} вопросов базы подряд — для полной подготовки.</value>
+  </data>
+  <data name="hm.open" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="hm.start" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="hm.topicsBadge" xml:space="preserve">
+    <value>Подготовка по темам</value>
+  </data>
+  <data name="hm.topicsBannerDesc" xml:space="preserve">
+    <value>Выберите нужную тему и решайте только её вопросы — лучший способ отдельно закрепить трудные места.</value>
+  </data>
+  <data name="hm.topicsFact1" xml:space="preserve">
+    <value>{n} тем</value>
+  </data>
+  <data name="hm.topicsFact2" xml:space="preserve">
+    <value>Отдельный тест по каждой теме</value>
+  </data>
+  <data name="hm.topicsFact3" xml:space="preserve">
+    <value>Закрепите слабые темы</value>
+  </data>
+  <data name="hm.topicsStart" xml:space="preserve">
+    <value>Выбрать тему</value>
+  </data>
+  <data name="users.kind" xml:space="preserve">
+    <value>Тип аккаунта</value>
+  </data>
+  <data name="users.kindStudent" xml:space="preserve">
+    <value>Ученик</value>
+  </data>
+  <data name="users.kindStudentHint" xml:space="preserve">
+    <value>Личный аккаунт: входит со своего телефона или компьютера, результаты только его.</value>
+  </data>
+  <data name="users.kindComputer" xml:space="preserve">
+    <value>Компьютер (учебный центр)</value>
+  </data>
+  <data name="users.kindComputerHint" xml:space="preserve">
+    <value>Для одного компьютера в центре. После первого входа логин не запрашивается, даже после выключения. С другого компьютера с этим логином войти нельзя.</value>
+  </data>
+  <data name="users.compShort" xml:space="preserve">
+    <value>Комп</value>
+  </data>
+  <data name="users.fComputers" xml:space="preserve">
+    <value>Компьютеры</value>
+  </data>
+  <data name="users.showPassword" xml:space="preserve">
+    <value>Показать пароль</value>
+  </data>
+  <data name="users.hidePassword" xml:space="preserve">
+    <value>Скрыть пароль</value>
+  </data>
+  <data name="users.phone" xml:space="preserve">
+    <value>Номер телефона</value>
+  </data>
+  <data name="users.phoneHint" xml:space="preserve">
+    <value>Обязательно для ученика. Например: +998 90 123 45 67 или 90 123 45 67</value>
+  </data>
+  <data name="err.phoneRequired" xml:space="preserve">
+    <value>Введите номер телефона ученика</value>
+  </data>
+  <data name="err.phoneFormat" xml:space="preserve">
+    <value>Неверный номер телефона. Например: +998 90 123 45 67</value>
+  </data>
+  <data name="users.deviceRuleOff" xml:space="preserve">
+    <value>Сейчас правило одного устройства выключено — ученик может входить с любого устройства. Включить: страница «Запросы устройств».</value>
+  </data>
+  <data name="dev.ruleTitle" xml:space="preserve">
+    <value>Правило одного устройства (ученики)</value>
+  </data>
+  <data name="dev.ruleOn" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="dev.ruleOff" xml:space="preserve">
+    <value>Выключено</value>
+  </data>
+  <data name="dev.ruleOnDesc" xml:space="preserve">
+    <value>Каждый ученик входит только с одного устройства. Для входа с другого нужно ваше подтверждение.</value>
+  </data>
+  <data name="dev.ruleOffDesc" xml:space="preserve">
+    <value>Ученики могут входить с любого устройства (телефон, компьютер) без ограничений.</value>
+  </data>
+  <data name="dev.ruleComputers" xml:space="preserve">
+    <value>Аккаунты компьютеров (учебного центра) всегда входят только со своего компьютера.</value>
+  </data>
+  <data name="dev.ruleEnable" xml:space="preserve">
+    <value>Включить правило</value>
+  </data>
+  <data name="dev.ruleDisable" xml:space="preserve">
+    <value>Выключить правило</value>
+  </data>
+  <data name="dev.ruleEnableConfirm" xml:space="preserve">
+    <value>Включить правило одного устройства? Каждый ученик будет привязан к устройству следующего входа, а с других — только с вашего подтверждения.</value>
+  </data>
+  <data name="dev.ruleDisableConfirm" xml:space="preserve">
+    <value>Выключить правило одного устройства? Ученики смогут входить с любого устройства.</value>
+  </data>
+  <data name="dev.ruleChangedOn" xml:space="preserve">
+    <value>Правило одного устройства включено</value>
+  </data>
+  <data name="dev.ruleChangedOff" xml:space="preserve">
+    <value>Правило одного устройства выключено — ученики могут входить с любого устройства</value>
+  </data>
+  <data name="dash.bilets" xml:space="preserve">
+    <value>Билеты</value>
+  </data>
+  <data name="dash.topics" xml:space="preserve">
+    <value>Темы</value>
+  </data>
+  <data name="dash.withImage" xml:space="preserve">
+    <value>Вопросы с изображением</value>
+  </data>
+  <data name="dash.lead" xml:space="preserve">
+    <value>Билеты, темы, изображения и переводы</value>
+  </data>
+  <data name="dash.live" xml:space="preserve">
+    <value>Данные актуальны</value>
+  </data>
+  <data name="dash.unit" xml:space="preserve">
+    <value>вопросов</value>
+  </data>
+  <data name="dash.perBilet" xml:space="preserve">
+    <value>вопросов в каждом</value>
+  </data>
+  <data name="dash.biletsDesc" xml:space="preserve">
+    <value>В каждом по {n} вопросов</value>
+  </data>
+  <data name="dash.pdd" xml:space="preserve">
+    <value>ПДД</value>
+  </data>
+  <data name="dash.topicsDesc" xml:space="preserve">
+    <value>Разделы правил дорожного движения</value>
+  </data>
+  <data name="dash.withoutImage" xml:space="preserve">
+    <value>Вопросы без изображения</value>
+  </data>
+  <data name="dash.imageShare" xml:space="preserve">
+    <value>с картинкой</value>
+  </data>
+  <data name="dash.translationsDesc" xml:space="preserve">
+    <value>Количество вопросов с текстом на каждом языке</value>
+  </data>
+  <data name="dash.langUz" xml:space="preserve">
+    <value>Узбекский (латиница)</value>
+  </data>
+  <data name="dash.langRu" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="dash.langUzk" xml:space="preserve">
+    <value>Узбекский (кириллица)</value>
+  </data>
+  <data name="dash.complete" xml:space="preserve">
+    <value>Полностью</value>
+  </data>
+  <data name="test.fullscreen" xml:space="preserve">
+    <value>Во весь экран</value>
+  </data>
+  <data name="test.fullscreenExit" xml:space="preserve">
+    <value>Выйти из полноэкранного</value>
+  </data>
+  <data name="test.backToSearch" xml:space="preserve">
+    <value>Назад к поиску</value>
+  </data>
+  <data name="test.qOf" xml:space="preserve">
+    <value>Вопрос {n} / {total}</value>
+  </data>
+  <data name="cab.progressHint2" xml:space="preserve">
+    <value>Каждый день: сколько вопросов решено и сколько верно. Нажмите на столбец — появятся детали.</value>
+  </data>
+  <data name="cab.pcAnswers" xml:space="preserve">
+    <value>ответов (за 30 дней)</value>
+  </data>
+  <data name="cab.pcCorrect" xml:space="preserve">
+    <value>правильных ответов</value>
+  </data>
+  <data name="cab.pcActiveDays" xml:space="preserve">
+    <value>активных дней</value>
+  </data>
+  <data name="cab.pcBestDay" xml:space="preserve">
+    <value>максимум: {date}</value>
+  </data>
+  <data name="cab.pcTip" xml:space="preserve">
+    <value>{date} — ответов: {n}: верно {ok}, ошибок {bad} ({pct}%)</value>
+  </data>
+  <data name="cab.pcTipEmpty" xml:space="preserve">
+    <value>{date} — нет занятий</value>
+  </data>
+  <data name="cab.pcLegendOk" xml:space="preserve">
+    <value>Верно</value>
+  </data>
+  <data name="cab.pcLegendBad" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="cab.pcLegendHint" xml:space="preserve">
+    <value>Число над столбцом — ответы за день</value>
+  </data>
+  <data name="cab.factorSolved" xml:space="preserve">
+    <value>Решено верно (из базы)</value>
+  </data>
+  <data name="cab.readinessRule" xml:space="preserve">
+    <value>Процент готовности — доля верно решённых вопросов базы. Все вопросы решены верно — 100%, вы готовы к экзамену. Вопросы из «Мои ошибки» не учитываются.</value>
+  </data>
+  <data name="users.phoneHint2" xml:space="preserve">
+    <value>Обязательно для ученика. +998 подставляется сам — введите остальные 9 цифр.</value>
+  </data>
+  <data name="hm.popularTopics" xml:space="preserve">
+    <value>Темы с большим числом вопросов</value>
+  </data>
+  <data name="hm.allTopics" xml:space="preserve">
+    <value>Все темы</value>
+  </data>
+  <data name="hm.questionsInBank" xml:space="preserve">
+    <value>в базе {n} вопросов</value>
+  </data>
+  <data name="hm.practiceShort" xml:space="preserve">
+    <value>Случайные вопросы — каждый раз новый набор</value>
+  </data>
+  <data name="hm.statTopics" xml:space="preserve">
+    <value>тем</value>
+  </data>
+  <data name="hm.statQuestions" xml:space="preserve">
+    <value>вопросов</value>
+  </data>
+  <data name="hm.statBilets" xml:space="preserve">
+    <value>билетов</value>
+  </data>
+  <data name="hm.topicsHint" xml:space="preserve">
+    <value>Выберите тему — только её вопросы</value>
+  </data>
+  <data name="test.confirmLabel" xml:space="preserve">
+    <value>Ваш ответ</value>
+  </data>
+  <data name="test.confirmQuestion" xml:space="preserve">
+    <value>Подтверждаете этот ответ?</value>
+  </data>
+  <data name="test.confirmYes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="test.confirmNo" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="form.biletAuto" xml:space="preserve">
+    <value>Вопрос будет автоматически добавлен в билет №{n} (если билет заполнен — откроется новый) и появится в своей теме.</value>
+  </data>
+  <data name="form.biletCurrent" xml:space="preserve">
+    <value>Этот вопрос в билете №{n}.</value>
+  </data>
+  <data name="test.timeLeft" xml:space="preserve">
+    <value>Оставшееся время</value>
+  </data>
+  <data name="test.endTime" xml:space="preserve">
+    <value>Время вышло — экзамен завершён.</value>
+  </data>
+  <data name="test.endMistakes" xml:space="preserve">
+    <value>3-я ошибка: экзамен не сдан (допускается не более 2 ошибок).</value>
+  </data>
+  <data name="users.lastSeen" xml:space="preserve">
+    <value>Последняя активность</value>
+  </data>
+  <data name="users.fOnline" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="users.fOffline" xml:space="preserve">
+    <value>Офлайн</value>
+  </data>
+  <data name="pres.online" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="pres.never" xml:space="preserve">
+    <value>Ещё не входил</value>
+  </data>
+  <data name="pres.justNow" xml:space="preserve">
+    <value>только что</value>
+  </data>
+  <data name="pres.minAgo" xml:space="preserve">
+    <value>{n} мин назад</value>
+  </data>
+  <data name="pres.hourAgo" xml:space="preserve">
+    <value>{n} ч назад</value>
+  </data>
+  <data name="pres.dayAgo" xml:space="preserve">
+    <value>{n} дн назад</value>
+  </data>
+  <data name="pres.onlineNow" xml:space="preserve">
+    <value>Сейчас онлайн: {n}</value>
+  </data>
+  <data name="pres.onlineHint" xml:space="preserve">
+    <value>Ученики, у которых сейчас открыт сайт (или приложение). Обновляется каждые 30 секунд.</value>
+  </data>
+  <data name="nv.tagline" xml:space="preserve">
+    <value>Умная подготовка к экзамену</value>
+  </data>
+  <data name="nv.theme" xml:space="preserve">
+    <value>Светлая / тёмная тема</value>
+  </data>
+  <data name="nv.navLearn" xml:space="preserve">
+    <value>Обучение</value>
+  </data>
+  <data name="nv.navProgress" xml:space="preserve">
+    <value>Мои результаты</value>
+  </data>
+  <data name="nv.sideTitle" xml:space="preserve">
+    <value>Проверьте себя</value>
+  </data>
+  <data name="nv.sideText" xml:space="preserve">
+    <value>20 вопросов, 25 минут — как на настоящем экзамене.</value>
+  </data>
+  <data name="nv.sideBtn" xml:space="preserve">
+    <value>Начать экзамен</value>
+  </data>
+  <data name="nv.searchHint" xml:space="preserve">
+    <value>Поиск вопроса...</value>
+  </data>
+  <data name="nv.tabExam" xml:space="preserve">
+    <value>Экзамен</value>
+  </data>
+  <data name="nv.heroTag" xml:space="preserve">
+    <value>{q} вопросов · {b} билетов</value>
+  </data>
+  <data name="nv.heroTitle" xml:space="preserve">
+    <value>Сдайте экзамен на права &lt;span&gt;с первой попытки&lt;/span&gt;</value>
+  </data>
+  <data name="nv.heroText" xml:space="preserve">
+    <value>Официальные вопросы, режим реального экзамена, работа над ошибками и подробная аналитика каждого шага.</value>
+  </data>
+  <data name="nv.toBilets" xml:space="preserve">
+    <value>Билеты</value>
+  </data>
+  <data name="nv.float1" xml:space="preserve">
+    <value>18/20 — сдано!</value>
+  </data>
+  <data name="nv.float2" xml:space="preserve">
+    <value>25:00 минут</value>
+  </data>
+  <data name="nv.todayAnswers" xml:space="preserve">
+    <value>ответов сегодня</value>
+  </data>
+  <data name="nv.modesTitle" xml:space="preserve">
+    <value>Режимы подготовки</value>
+  </data>
+  <data name="nv.modesSub" xml:space="preserve">
+    <value>Выберите подходящий режим — результаты автоматически попадут в аналитику</value>
+  </data>
+  <data name="nv.fact25" xml:space="preserve">
+    <value>25 минут</value>
+  </data>
+  <data name="nv.fact2err" xml:space="preserve">
+    <value>не более 2 ошибок</value>
+  </data>
+  <data name="nv.biletsEyebrow" xml:space="preserve">
+    <value>Официальные билеты</value>
+  </data>
+  <data name="nv.biletsPassed" xml:space="preserve">
+    <value>Сданные билеты</value>
+  </data>
+  <data name="nv.biletsTried" xml:space="preserve">
+    <value>Решено билетов: {n}</value>
+  </data>
+  <data name="nv.stPassed" xml:space="preserve">
+    <value>Сдан</value>
+  </data>
+  <data name="nv.stPartial" xml:space="preserve">
+    <value>Почти (60%+)</value>
+  </data>
+  <data name="nv.stFailed" xml:space="preserve">
+    <value>Не сдан</value>
+  </data>
+  <data name="nv.stNew" xml:space="preserve">
+    <value>Ещё не решён</value>
+  </data>
+  <data name="nv.best" xml:space="preserve">
+    <value>лучший {n}%</value>
+  </data>
+  <data name="nv.topicFilter" xml:space="preserve">
+    <value>Поиск темы...</value>
+  </data>
+  <data name="nv.loginTitle" xml:space="preserve">
+    <value>Готовьтесь к экзамену &lt;span&gt;уверенно&lt;/span&gt;</value>
+  </data>
+  <data name="nv.feat1" xml:space="preserve">
+    <value>66 билетов, 1320 вопросов</value>
+  </data>
+  <data name="nv.feat2" xml:space="preserve">
+    <value>Режим реального экзамена</value>
+  </data>
+  <data name="nv.feat3" xml:space="preserve">
+    <value>Подробная аналитика</value>
+  </data>
+  <data name="nv.feat4" xml:space="preserve">
+    <value>Работа над ошибками</value>
+  </data>
+  <data name="nv.mistakesLeft" xml:space="preserve">
+    <value>Допустимые ошибки</value>
+  </data>
+  <data name="nv.explanation" xml:space="preserve">
+    <value>Пояснение</value>
+  </data>
+  <data name="nv.questionMap" xml:space="preserve">
+    <value>Карта вопросов</value>
+  </data>
+  <data name="nv.left" xml:space="preserve">
+    <value>Осталось</value>
+  </data>
+  <data name="nv.keysTitle" xml:space="preserve">
+    <value>Клавиатура:</value>
+  </data>
+  <data name="nv.keysAnswer" xml:space="preserve">
+    <value>ответ</value>
+  </data>
+  <data name="nv.keysMove" xml:space="preserve">
+    <value>вопросы</value>
+  </data>
+  <data name="nv.skipped" xml:space="preserve">
+    <value>Пропущено</value>
+  </data>
+  <data name="nv.avgTimeShort" xml:space="preserve">
+    <value>ср. время</value>
+  </data>
+  <data name="nv.sec" xml:space="preserve">
+    <value>{n} с</value>
+  </data>
+  <data name="nv.secShort" xml:space="preserve">
+    <value>сек</value>
+  </data>
+  <data name="nv.openAnalysis" xml:space="preserve">
+    <value>Открыть аналитику</value>
+  </data>
+  <data name="nv.avgTime" xml:space="preserve">
+    <value>Среднее время ответа</value>
+  </data>
+  <data name="nv.passChance" xml:space="preserve">
+    <value>Вероятность сдать экзамен</value>
+  </data>
+  <data name="nv.passChanceHint" xml:space="preserve">
+    <value>По последним 10 экзаменационным тестам (свежие весомее).</value>
+  </data>
+  <data name="nv.thisWeek" xml:space="preserve">
+    <value>За неделю</value>
+  </data>
+  <data name="nv.vsPrevWeek" xml:space="preserve">
+    <value>прошлая неделя: {n}</value>
+  </data>
+  <data name="nv.trendTitle" xml:space="preserve">
+    <value>Динамика результатов</value>
+  </data>
+  <data name="nv.trendSub" xml:space="preserve">
+    <value>Последние 30 тестов — нажмите на точку для подробностей</value>
+  </data>
+  <data name="nv.passLine" xml:space="preserve">
+    <value>проходной порог</value>
+  </data>
+  <data name="nv.trendEmpty" xml:space="preserve">
+    <value>Для графика решите хотя бы 2 теста.</value>
+  </data>
+  <data name="nv.lgMid" xml:space="preserve">
+    <value>60–89%</value>
+  </data>
+  <data name="nv.lgLow" xml:space="preserve">
+    <value>ниже 60%</value>
+  </data>
+  <data name="nv.streakTitle" xml:space="preserve">
+    <value>Серия активности</value>
+  </data>
+  <data name="nv.daysInRow" xml:space="preserve">
+    <value>дней подряд</value>
+  </data>
+  <data name="nv.bestStreak" xml:space="preserve">
+    <value>Рекорд: {n} дн.</value>
+  </data>
+  <data name="nv.todayLine" xml:space="preserve">
+    <value>Сегодня отвечено вопросов: {n}.</value>
+  </data>
+  <data name="nv.heatTitle" xml:space="preserve">
+    <value>Карта активности</value>
+  </data>
+  <data name="nv.heatSub" xml:space="preserve">
+    <value>Последние 18 недель: клетка — день, чем темнее, тем больше практики</value>
+  </data>
+  <data name="nv.less" xml:space="preserve">
+    <value>Меньше</value>
+  </data>
+  <data name="nv.more" xml:space="preserve">
+    <value>Больше</value>
+  </data>
+  <data name="nv.weekdayTitle" xml:space="preserve">
+    <value>Дни недели</value>
+  </data>
+  <data name="nv.weekdaySub" xml:space="preserve">
+    <value>В какие дни вы занимаетесь больше и точнее</value>
+  </data>
+  <data name="nv.hourTitle" xml:space="preserve">
+    <value>Активность по часам</value>
+  </data>
+  <data name="nv.bestHour" xml:space="preserve">
+    <value>Самое активное время: {h}</value>
+  </data>
+  <data name="nv.wd1" xml:space="preserve">
+    <value>Пн</value>
+  </data>
+  <data name="nv.wd2" xml:space="preserve">
+    <value>Вт</value>
+  </data>
+  <data name="nv.wd3" xml:space="preserve">
+    <value>Ср</value>
+  </data>
+  <data name="nv.wd4" xml:space="preserve">
+    <value>Чт</value>
+  </data>
+  <data name="nv.wd5" xml:space="preserve">
+    <value>Пт</value>
+  </data>
+  <data name="nv.wd6" xml:space="preserve">
+    <value>Сб</value>
+  </data>
+  <data name="nv.wd7" xml:space="preserve">
+    <value>Вс</value>
+  </data>
+  <data name="nv.biletMap" xml:space="preserve">
+    <value>Карта билетов</value>
+  </data>
+  <data name="nv.biletMapSub" xml:space="preserve">
+    <value>Лучший результат по каждому билету — нажмите, чтобы решить</value>
+  </data>
+  <data name="nv.biletTip" xml:space="preserve">
+    <value>Билет {b}: лучший {best}%, попыток {n}</value>
+  </data>
+  <data name="nv.topMissed" xml:space="preserve">
+    <value>Самые частые ошибки</value>
+  </data>
+  <data name="nv.topMissedSub" xml:space="preserve">
+    <value>Топ-10 по всем попыткам</value>
+  </data>
+  <data name="nv.practiceThese" xml:space="preserve">
+    <value>Решить их</value>
+  </data>
+  <data name="nv.ofTries" xml:space="preserve">
+    <value>из {n}</value>
+  </data>
+  <data name="cab.durH" xml:space="preserve">
+    <value>{h} ч</value>
+  </data>
+  <data name="cab.durHM" xml:space="preserve">
+    <value>{h} ч {m} мин</value>
+  </data>
+  <data name="cab.durM" xml:space="preserve">
+    <value>{m} мин</value>
+  </data>
+  <data name="cab.durMShort" xml:space="preserve">
+    <value>{m}м</value>
+  </data>
+  <data name="cab.pcTotalTime" xml:space="preserve">
+    <value>время занятий (за 30 дней)</value>
+  </data>
+  <data name="cab.pcTipTime" xml:space="preserve">
+    <value>Время занятий: {time}</value>
+  </data>
+  <data name="cab.pcLegendTime" xml:space="preserve">
+    <value>Синее число под днём — время занятий в этот день (ч:мин)</value>
+  </data>
+  <data name="qd.pageTitle" xml:space="preserve">
+    <value>Удаление вопроса</value>
+  </data>
+  <data name="qd.title" xml:space="preserve">
+    <value>Удалить вопрос</value>
+  </data>
+  <data name="qd.sub" xml:space="preserve">
+    <value>Подтвердите удаление этого вопроса.</value>
+  </data>
+  <data name="qd.bilet" xml:space="preserve">
+    <value>Билет №{n}</value>
+  </data>
+  <data name="qd.correct" xml:space="preserve">
+    <value>Верный ответ</value>
+  </data>
+  <data name="qd.warnTitle" xml:space="preserve">
+    <value>Что произойдёт при удалении</value>
+  </data>
+  <data name="qd.warnEverywhere" xml:space="preserve">
+    <value>Вопрос будет убран из билета, темы и всех видов тестов; количество вопросов уменьшится.</value>
+  </data>
+  <data name="qd.warnAnswers" xml:space="preserve">
+    <value>Ученики отвечали на этот вопрос {n} раз — эти ответы тоже удалятся из истории результатов.</value>
+  </data>
+  <data name="qd.warnMistakes" xml:space="preserve">
+    <value>Также удалится из «Моих ошибок» у {n} учеников.</value>
+  </data>
+  <data name="qd.warnUndo" xml:space="preserve">
+    <value>Это действие нельзя отменить.</value>
+  </data>
+  <data name="qd.cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="qd.confirm" xml:space="preserve">
+    <value>Да, удалить</value>
+  </data>
+  <data name="pres.offline" xml:space="preserve">
+    <value>Офлайн</value>
+  </data>
+  <data name="cab.durS" xml:space="preserve">
+    <value>{s} сек</value>
+  </data>
+  <data name="cab.durSShort" xml:space="preserve">
+    <value>{s}с</value>
+  </data>
+</root>

@@ -1,0 +1,186 @@
+@model NovaTest
+@* Yagona test sahifasi: barcha test turlari (real imtihon, 20–200 savol, marafon, bilet, mavzu, xatolar, qidiruv).
+   Mantiq — wwwroot/js/nova-test.js; bu yerda faqat sahifa tuzilishi va sozlamalar. *@
+@{
+    var tracked = TestTypes.Detect(Context.Request);
+    var type = Model.Type ?? tracked?.Type ?? "";
+    var reference = Model.Ref ?? tracked?.Ref;
+
+    // Test nomi uch tilda (til almashtirilganda sahifa qayta yuklanmaydi)
+    string NameIn(string lang)
+    {
+        if (string.IsNullOrEmpty(type)) return Texts.Get(lang, "test.pageTitle");
+        var name = Texts.Get(lang, "testType." + type);
+        if (string.IsNullOrWhiteSpace(reference)) return name;
+        return type switch
+        {
+            TestTypes.Bilet => $"{name} №{reference}",
+            TestTypes.Topic => $"{name}: {Topics.Display(reference, lang)}",
+            _ => name,
+        };
+    }
+    var testName = NameIn(L.Lang);
+    var homeUrl = User.IsInRole(Roles.SuperAdmin) ? "/Question/Index1" : "/";
+
+    var cfg = new
+    {
+        source = Model.Source,
+        format = Model.Format,
+        limit = Model.Limit,
+        exam = Model.Exam,
+        exitUrl = Model.ExitUrl,
+        bilet = Model.Bilet,
+        type,
+        reference,
+        topicNames = Model.Topic == null ? null : new { uz = Topics.Display(Model.Topic, Lang.Uz), ru = Topics.Display(Model.Topic, Lang.Ru), uzk = Topics.Display(Model.Topic, Lang.Uzk) },
+        save = User.Identity?.IsAuthenticated == true && !string.IsNullOrEmpty(type),
+        analysisUrl = User.IsInRole(Roles.SuperAdmin) ? null : "/Cabinet/Analysis",
+    };
+}
+<!DOCTYPE html>
+<html lang="@L.HtmlLang" data-lang="@L.Lang">
+<head>
+    <partial name="_NvHead" />
+    <title>@testName — AvtoPrava Nova</title>
+</head>
+<body class="nt-body">
+    <header class="nt-top">
+        <div class="nt-top-in">
+            <a class="nt-brand" href="@homeUrl" aria-label="AvtoPrava Nova">
+                <span class="nv-mark">@Icons.Mark</span><b>AvtoPrava Nova</b>
+            </a>
+            <div class="nt-title">
+                <span class="nt-title-name" id="ntName" title="@testName" data-i18n-pick
+                      data-uz="@NameIn(Lang.Uz)" data-ru="@NameIn(Lang.Ru)" data-uzk="@NameIn(Lang.Uzk)">@testName</span>
+                <span class="nt-title-sub" id="ntSub">@L["test.loading"]</span>
+            </div>
+            <div class="nt-top-act">
+                @if (Model.Exam)
+                {
+                    <span class="nt-lives nt-hide-sm" id="ntLives" title="@L["nv.mistakesLeft"]" data-i18n-title="nv.mistakesLeft"><i></i><i></i></span>
+                    <div class="nt-timer" id="ntTimer" role="timer" title="@L["test.timeLeft"]" data-i18n-title="test.timeLeft" hidden>
+                        @Icons.Timer <span id="ntTimerVal">25:00</span><i id="ntTimerBar" style="width:100%"></i>
+                    </div>
+                }
+                <button type="button" class="nt-btn icon nt-hide-sm" id="ntFull" title="@L["test.fullscreen"]" data-i18n-title="test.fullscreen" hidden>@Icons.Expand</button>
+                <partial name="_ThemeToggle" />
+                <partial name="_LangDropdown" />
+                <partial name="_UserMenu" />
+            </div>
+        </div>
+        <div class="nt-progress" aria-hidden="true"><i id="ntBar"></i></div>
+    </header>
+
+    <div class="nt-wrap">
+        <div class="nt-stage">
+            <main class="nt-main">
+                <section class="nt-qcard" id="ntCard" aria-live="polite">
+                    <div class="nt-qhead">
+                        <span class="nt-qnum" id="ntQnum">@L["test.loading"]</span>
+                        <span class="nt-qtag" id="ntQtag"></span>
+                    </div>
+                    <h1 id="questionText">@L["test.loading"]</h1>
+                </section>
+
+                <div class="nt-error" id="errorBox" hidden></div>
+
+                <div class="nt-body-grid" id="ntGrid">
+                    <div id="optionsContainer" role="list"></div>
+                    <figure class="nt-img" id="ntImgBox" style="margin:0" hidden>
+                        <img id="questionImage" alt="@L["test.imageAlt"]" data-i18n-alt="test.imageAlt" />
+                        <span class="nt-img-zoom">@Icons.Zoom</span>
+                    </figure>
+                </div>
+
+                <div class="nt-explain" id="ntExplain" hidden><b data-i18n="nv.explanation">@L["nv.explanation"]</b><span></span></div>
+
+                <div class="nt-pager">
+                    <button type="button" class="nt-btn" id="ntPrev">@Icons.ArrowLeft <span data-i18n="qs.prev">@L["qs.prev"]</span></button>
+                    <button type="button" class="nt-btn" id="ntNext"><span data-i18n="qs.next">@L["qs.next"]</span> @Icons.ArrowRight</button>
+                </div>
+
+                @* Savollar navigatsiyasi — pastda (eski versiyadagidek): Chiqish · raqamlar · Yakunlash *@
+                <section class="nt-bottom">
+                    <div class="nt-bottom-head">
+                        <h4><span data-i18n="nv.questionMap">@L["nv.questionMap"]</span> <span id="ntMapCount"></span></h4>
+                        <div class="nt-stats">
+                            <div class="ok"><b id="ntOk">0</b><span data-i18n="cab.pcLegendOk">@L["cab.pcLegendOk"]</span></div>
+                            <div class="bad"><b id="ntBad">0</b><span data-i18n="cab.pcLegendBad">@L["cab.pcLegendBad"]</span></div>
+                            <div><b id="ntLeft">0</b><span data-i18n="nv.left">@L["nv.left"]</span></div>
+                        </div>
+                    </div>
+                    <div class="nt-bottom-row">
+                        <button type="button" class="nt-btn danger nt-bottom-btn" id="exitBtn">@Icons.ArrowLeft <span data-i18n="@Model.ExitKey">@L[Model.ExitKey]</span></button>
+                        <div id="questionNav"></div>
+                        <button type="button" class="nt-btn primary nt-bottom-btn" id="finishBtn">@Icons.Check <span data-i18n="test.finish">@L["test.finish"]</span></button>
+                    </div>
+                    <div class="nt-keys">
+                        <kbd>F1</kbd>–<kbd>F5</kbd> <span data-i18n="nv.keysAnswer">@L["nv.keysAnswer"]</span> ·
+                        <kbd>←</kbd><kbd>→</kbd> <span data-i18n="nv.keysMove">@L["nv.keysMove"]</span>
+                        @if (Model.Exam)
+                        {
+                            <span> · <kbd>Enter</kbd> <span data-i18n="test.confirmYes">@L["test.confirmYes"]</span> · <kbd>Esc</kbd> <span data-i18n="test.confirmNo">@L["test.confirmNo"]</span></span>
+                        }
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="nt-mobilebar">
+        <button type="button" class="nt-btn icon danger" id="ntExitM" aria-label="@L[Model.ExitKey]">@Icons.ArrowLeft</button>
+        <button type="button" class="nt-btn icon" id="ntPrevM" aria-label="@L["qs.prev"]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg></button>
+        <button type="button" class="nt-btn icon" id="ntNextM" aria-label="@L["qs.next"]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg></button>
+        <button type="button" class="nt-btn primary" id="finishBtnM">@Icons.Check <span data-i18n="test.finish">@L["test.finish"]</span></button>
+    </div>
+
+    @* Natija *@
+    <div class="nt-modal" id="resultCard" hidden>
+        <div class="nt-modal-card" role="dialog" aria-modal="true" aria-labelledby="ntResTitle">
+            <div class="nt-res-ring" id="ntResRing"><div><b id="ntResPct">0%</b><span data-i18n="test.result">@L["test.result"]</span></div></div>
+            <h2 class="nt-res-title" id="ntResTitle"></h2>
+            <div class="nt-res-badge" id="ntResBadge"></div>
+            <div class="nt-res-grid">
+                <div class="ok"><b id="ntResOk">0</b><span data-i18n="cab.pcLegendOk">@L["cab.pcLegendOk"]</span></div>
+                <div class="bad"><b id="ntResBad">0</b><span data-i18n="cab.pcLegendBad">@L["cab.pcLegendBad"]</span></div>
+                <div><b id="ntResSkip">0</b><span data-i18n="nv.skipped">@L["nv.skipped"]</span></div>
+                <div><b id="ntResTime">—</b><span data-i18n="nv.avgTimeShort">@L["nv.avgTimeShort"]</span></div>
+            </div>
+            <p id="resultText"></p>
+            <div class="nt-res-actions">
+                <button type="button" id="reviewErrorsBtn" class="nt-btn primary" hidden>@Icons.Repeat <span data-i18n="test.reviewErrors">@L["test.reviewErrors"]</span></button>
+                <button type="button" id="reviewBtn" class="nt-btn">@Icons.Eye <span data-i18n="test.review">@L["test.review"]</span></button>
+                <button type="button" id="retryBtn" class="nt-btn">@Icons.Play <span data-i18n="test.retry">@L["test.retry"]</span></button>
+                @if (cfg.analysisUrl != null && cfg.save)
+                {
+                    <a class="nt-btn" href="@cfg.analysisUrl">@Icons.Chart <span data-i18n="nv.openAnalysis">@L["nv.openAnalysis"]</span></a>
+                }
+            </div>
+            <div class="nt-saved" id="ntSaved"></div>
+        </div>
+    </div>
+
+    @* Javobni tasdiqlash (real imtihon) *@
+    <div class="nt-modal" id="answerConfirm" hidden>
+        <div class="nt-modal-card" role="dialog" aria-modal="true" aria-labelledby="acLabel">
+            <div id="acLabel" class="ac-label" data-i18n="test.confirmLabel">@L["test.confirmLabel"]</div>
+            <div class="ac-answer"><div id="acKey" class="ac-key"></div><div id="acText" class="ac-text"></div></div>
+            <div class="ac-q" data-i18n="test.confirmQuestion">@L["test.confirmQuestion"]</div>
+            <div class="ac-actions">
+                <button id="acNo" type="button" class="nt-btn" data-i18n="test.confirmNo">@L["test.confirmNo"]</button>
+                <button id="acYes" type="button" class="nt-btn primary" data-i18n="test.confirmYes">@L["test.confirmYes"]</button>
+            </div>
+        </div>
+    </div>
+
+    @* Rasmni kattalashtirish *@
+    <div class="nt-zoom" id="imageModal" hidden>
+        <button type="button" id="closeModal" aria-label="×">×</button>
+        <img id="modalImg" alt="" />
+    </div>
+
+    <script>window.NOVA_TEST = @Json.Serialize(cfg);</script>
+    <script src="~/js/ui.js" asp-append-version="true"></script>
+    <script src="~/js/nova-test.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+@model List<AppUser>
+@{
+    Layout = "_AdminLayout";
+    ViewData["TitleKey"] = "users.pageTitle";
+    ViewData["Title"] = L["users.pageTitle"];
+    var currentUserId = (int)ViewBag.CurrentUserId;
+    var pendingUsers = (HashSet<int>)ViewBag.PendingUsers;
+    var msgKey = TempData["MsgKey"] as string;
+    var errKey = TempData["ErrKey"] as string;
+    var now = DateTime.UtcNow;
+    var q = ViewBag.Q as string ?? "";
+    var status = ViewBag.Status as string ?? "";
+    var presence = (PresenceTracker)ViewBag.Presence;
+    var onlineStudents = Model.Count(u => u.Role == Roles.User && presence.IsOnline(u.Id));
+}
+
+<partial name="_UsersStyles" />
+
+<div class="us-page us-page-wide">
+    <div class="us-header">
+        <div>
+            <div class="us-eyebrow" data-i18n="admin.panel">@L["admin.panel"]</div>
+            <h1 class="us-title" data-i18n-html="users.title">@L.Html("users.title")</h1>
+            <p class="us-sub" data-i18n="users.subtitle">@L["users.subtitle"]</p>
+        </div>
+        <div class="us-header-actions">
+            <a asp-action="Devices" class="us-btn us-btn-ghost">
+                <span aria-hidden="true">🔔</span>
+                <span data-i18n="dev.title">@L["dev.title"]</span>
+                @if (pendingUsers.Count > 0)
+                {
+                    <span class="us-count-badge">@pendingUsers.Count</span>
+                }
+            </a>
+            <a asp-action="Create" class="us-btn us-btn-primary">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                <span data-i18n="users.new">@L["users.new"]</span>
+            </a>
+        </div>
+    </div>
+
+    @if (msgKey != null)
+    {
+        <div class="us-alert ok" role="status" data-i18n="@msgKey">@L[msgKey]</div>
+    }
+    @if (errKey != null)
+    {
+        <div class="us-alert err" role="alert" data-i18n="@errKey">@L[errKey]</div>
+    }
+
+    @* ⏳ Muddati tugayotgan (7 kun ichida) va tugagan foydalanuvchilar — alohida, eng yaqin muddat birinchi *@
+    @{
+        var soonUsers = Model
+            .Where(u => u.IsRestricted && u.AccessExpiresAt != null && !u.IsExpired(now) && (u.AccessExpiresAt.Value - now).TotalDays <= 7)
+            .OrderBy(u => u.AccessExpiresAt).ToList();
+        var expiredUsers = Model.Where(u => u.IsExpired(now)).OrderByDescending(u => u.AccessExpiresAt).ToList();
+    }
+    @if (soonUsers.Count > 0 || expiredUsers.Count > 0)
+    {
+        <div class="us-expiry">
+            @foreach (var (list, isSoon) in new[] { (soonUsers, true), (expiredUsers, false) })
+            {
+                if (list.Count == 0) { continue; }
+                var titleKey = isSoon ? "users.soonTitle" : "users.expiredTitle";
+                var subKey = isSoon ? "users.soonSub" : "users.expiredSub";
+                <section class="us-expiry-box @(isSoon ? "soon" : "gone")" id="@(isSoon ? "soonBox" : "expiredBox")">
+                    <h2 class="us-expiry-title">
+                        <span aria-hidden="true">@(isSoon ? "⏳" : "⛔")</span>
+                        <span data-i18n="@titleKey">@L[titleKey]</span>
+                        <span class="us-count-badge @(isSoon ? "" : "red")">@list.Count</span>
+                    </h2>
+                    <p class="us-hint" data-i18n="@subKey">@L[subKey]</p>
+                    <div class="us-expiry-list">
+                        @foreach (var u in list)
+                        {
+                            var left = (int)Math.Ceiling((u.AccessExpiresAt!.Value - now).TotalDays);
+                            <div class="us-expiry-item">
+                                <div class="us-expiry-who">
+                                    <span class="us-login">@u.Username</span>
+                                    <span class="us-muted">@u.FullName</span>
+                                    @if (!u.IsActive)
+                                    {
+                                        <span class="us-pill off" data-i18n="users.inactive">@L["users.inactive"]</span>
+                                    }
+                                </div>
+                                <div class="us-expiry-when">
+                                    <span class="us-date">@L.Stamp(u.AccessExpiresAt.Value)</span>
+                                    @if (isSoon)
+                                    {
+                                        <span class="us-left warn" data-i18n="users.daysLeft" data-i18n-args='{"n":@left}'>@L.F("users.daysLeft", ("n", left))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="us-pill exp" data-i18n="users.expired">@L["users.expired"]</span>
+                                    }
+                                </div>
+                                <a asp-action="Edit" asp-route-id="@u.Id" class="us-btn us-btn-ghost us-btn-sm" data-i18n="users.extend">@L["users.extend"]</a>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+        </div>
+    }
+
+    <div class="us-toolbar">
+        <label class="us-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+            <input type="search" id="userSearch" value="@q" autocomplete="off"
+                   placeholder="@L["users.search"]" data-i18n-placeholder="users.search" />
+        </label>
+        <select id="userStatus" class="us-input us-select" aria-label="@L["users.status"]">
+            @foreach (var (val, key) in new[] {
+                ("", "users.fAll"), ("online", "users.fOnline"), ("offline", "users.fOffline"), ("active", "users.fActive"), ("inactive", "users.fInactive"),
+                ("expired", "users.fExpired"), ("soon", "users.fSoon"), ("unlimited", "users.fUnlimited"),
+                ("pending", "users.fPending"), ("nodevice", "users.fNoDevice"), ("computer", "users.fComputers") })
+            {
+                <option value="@val" selected="@(val == status)" data-i18n="@key">@L[key]</option>
+            }
+        </select>
+        <select id="userRole" class="us-input us-select" aria-label="@L["users.role"]">
+            <option value="" data-i18n="users.fAllRoles">@L["users.fAllRoles"]</option>
+            @foreach (var r in Roles.All)
+            {
+                var key = "role." + r;
+                <option value="@r" data-i18n="@key">@L[key]</option>
+            }
+        </select>
+        <span class="us-online-now" id="onlineNow" title="@L["pres.onlineHint"]" data-i18n-title="pres.onlineHint">
+            <i class="us-pdot on" aria-hidden="true"></i>
+            <span id="onlineNowText" data-i18n="pres.onlineNow" data-i18n-args='{"n":@onlineStudents}'>@L.F("pres.onlineNow", ("n", onlineStudents))</span>
+        </span>
+        <span class="us-found" id="userFound" data-i18n="users.found"></span>
+    </div>
+
+    <div class="us-card us-card-list">
+        @if (Model.Count == 0)
+        {
+            <div class="us-empty" data-i18n="users.empty">@L["users.empty"]</div>
+        }
+        else
+        {
+            <div style="overflow-x:auto;">
+                <table class="us-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="users.username">@L["users.username"]</th>
+                            <th class="hide-sm hide-c-sm" data-i18n="users.fullName">@L["users.fullName"]</th>
+                            <th class="hide-sm" data-i18n="users.phone">@L["users.phone"]</th>
+                            <th data-i18n="users.role">@L["users.role"]</th>
+                            <th data-i18n="users.status">@L["users.status"]</th>
+                            <th data-i18n="users.access">@L["users.access"]</th>
+                            <th class="hide-sm hide-c-md" data-i18n="users.device">@L["users.device"]</th>
+                            <th class="hide-md hide-c-lg" data-i18n="users.lastSeen">@L["users.lastSeen"]</th>
+                            <th style="text-align:right;" data-i18n="qs.colActions">@L["qs.colActions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var u in Model)
+                        {
+                            var isMe = u.Id == currentUserId;
+                            var roleKey = "role." + u.Role;
+                            var expired = u.IsExpired(now);
+                            var unlimited = !u.IsRestricted || u.AccessExpiresAt == null;
+                            var daysLeft = u.AccessExpiresAt is DateTime exp ? (int)Math.Ceiling((exp - now).TotalDays) : 0;
+                            var hasPending = pendingUsers.Contains(u.Id);
+                            var tags = new List<string> { u.IsActive ? "active" : "inactive" };
+                            if (expired) tags.Add("expired");
+                            if (!unlimited && !expired && daysLeft <= 7) tags.Add("soon");
+                            if (unlimited) tags.Add("unlimited");
+                            if (hasPending) tags.Add("pending");
+                            if (u.IsRestricted && u.DeviceId == null) tags.Add("nodevice");
+                            if (u.IsComputer && u.IsRestricted) tags.Add("computer");
+                            var online = presence.IsOnline(u.Id);
+                            var seen = presence.LastSeen(u);
+                            tags.Add(online ? "online" : "offline");
+
+                            var phone = UserService.FormatPhone(u.Phone);
+                            <tr data-search="@((u.Username + " " + u.FullName + " " + phone + " " + new string((u.Phone ?? "").Where(char.IsDigit).ToArray())).ToLowerInvariant())" data-tags="@string.Join(" ", tags)" data-role="@u.Role"
+                                data-uid="@u.Id" data-online="@(online ? "1" : "0")" data-seen="@(seen is DateTime sa ? DateTime.SpecifyKind(sa, DateTimeKind.Utc).ToString("o") : "")">
+                                <td>
+                                    <i class="us-pdot @(online ? "on" : "")" data-pdot aria-hidden="true"></i>
+                                    <span class="us-login">@u.Username</span>
+                                    @if (isMe)
+                                    {
+                                        <span class="us-you" data-i18n="users.you">@L["users.you"]</span>
+                                    }
+                                </td>
+                                <td class="hide-sm hide-c-sm">@(u.FullName ?? "—")</td>
+                                <td class="hide-sm us-nowrap">
+                                    @if (string.IsNullOrEmpty(phone))
+                                    {
+                                        <span class="us-muted">—</span>
+                                    }
+                                    else
+                                    {
+                                        <a class="us-phone" href="tel:@u.Phone">@phone</a>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="us-pill @(u.Role == Roles.SuperAdmin ? "admin" : "user")" data-i18n="@roleKey">@L[roleKey]</span>
+                                    @if (u.IsComputer && u.IsRestricted)
+                                    {
+                                        <span class="us-pill comp" title="@L["users.kindComputer"]" data-i18n="users.compShort">@L["users.compShort"]</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (u.IsActive)
+                                    {
+                                        <span class="us-pill on" data-i18n="users.active">@L["users.active"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="us-pill off" data-i18n="users.inactive">@L["users.inactive"]</span>
+                                    }
+                                </td>
+                                <td class="us-nowrap">
+                                    @if (unlimited)
+                                    {
+                                        <span class="us-pill inf">∞ <span data-i18n="users.unlimited">@L["users.unlimited"]</span></span>
+                                    }
+                                    else if (expired)
+                                    {
+                                        <span class="us-pill exp" data-i18n="users.expired">@L["users.expired"]</span>
+                                        <div class="us-muted">@L.Stamp(u.AccessExpiresAt!.Value)</div>
+                                    }
+                                    else
+                                    {
+                                        <span class="us-date">@L.Stamp(u.AccessExpiresAt!.Value)</span>
+                                        <div class="us-left @(daysLeft <= 7 ? "warn" : "")" data-i18n="users.daysLeft" data-i18n-args='{"n":@daysLeft}'>@L.F("users.daysLeft", ("n", daysLeft))</div>
+                                    }
+                                </td>
+                                <td class="hide-sm hide-c-md">
+                                    @if (!u.IsRestricted)
+                                    {
+                                        <span class="us-muted">—</span>
+                                    }
+                                    else if (u.DeviceId == null)
+                                    {
+                                        <span class="us-muted" data-i18n="users.noDevice">@L["users.noDevice"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="us-device">@u.DeviceInfo</span>
+                                    }
+                                    @if (hasPending)
+                                    {
+                                        <div><a asp-action="Devices" class="us-pill pend" data-i18n="users.pendingDevice">@L["users.pendingDevice"]</a></div>
+                                    }
+                                </td>
+                                <td class="hide-md hide-c-lg us-when" data-seen-cell>
+                                    @if (online)
+                                    {
+                                        <span class="us-pres on" data-i18n="pres.online">@L["pres.online"]</span>
+                                    }
+                                    else if (seen is DateTime ls)
+                                    {
+                                        @L.Stamp(ls)
+                                    }
+                                    else
+                                    {
+                                        <span class="us-muted" data-i18n="pres.never">@L["pres.never"]</span>
+                                    }
+                                </td>
+                                <td class="us-actions">
+                                    <a asp-action="Edit" asp-route-id="@u.Id" class="us-icon-btn"
+                                       title="@L["qs.edit"]" data-i18n-title="qs.edit">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
+                                    </a>
+                                    <form asp-action="Delete" asp-route-id="@u.Id" method="post" data-name="@u.Username"
+                                          onsubmit="return confirm(I18n.t('users.confirmDelete', { name: this.dataset.name }))">
+                                        <button type="submit" class="us-icon-btn del" @(isMe ? "disabled" : "")
+                                                title="@L["qs.delete"]" data-i18n-title="qs.delete">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6" />
+                                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="us-empty" id="noMatch" hidden data-i18n="users.noMatch">@L["users.noMatch"]</div>
+        }
+    </div>
+</div>
+
+<script>
+    // Qidiruv va filtrlar — sahifa qayta yuklanmaydi; tanlov manzilda saqlanadi (orqaga qaytganda ham qoladi)
+    (function () {
+        var search = document.getElementById("userSearch");
+        var statusSel = document.getElementById("userStatus");
+        var roleSel = document.getElementById("userRole");
+        var found = document.getElementById("userFound");
+        var noMatch = document.getElementById("noMatch");
+        var rows = Array.prototype.slice.call(document.querySelectorAll("#usersTable tbody tr"));
+        var roleFromUrl = new URLSearchParams(location.search).get("role");
+        if (roleFromUrl) roleSel.value = roleFromUrl;
+
+        function apply() {
+            var q = search.value.trim().toLowerCase();
+            var st = statusSel.value, role = roleSel.value, shown = 0;
+            rows.forEach(function (tr) {
+                var ok = (!q || tr.dataset.search.indexOf(q) >= 0) &&
+                         (!st || (" " + tr.dataset.tags + " ").indexOf(" " + st + " ") >= 0) &&
+                         (!role || tr.dataset.role === role);
+                tr.hidden = !ok;
+                if (ok) shown++;
+            });
+            if (noMatch) noMatch.hidden = shown > 0 || rows.length === 0;
+            var args = { n: shown, total: rows.length };
+            found.setAttribute("data-i18n-args", JSON.stringify(args));
+            found.textContent = I18n.t("users.found", args);
+
+            var url = new URL(location.href);
+            [["q", search.value.trim()], ["status", st], ["role", role]].forEach(function (p) {
+                if (p[1]) url.searchParams.set(p[0], p[1]); else url.searchParams.delete(p[0]);
+            });
+            history.replaceState(null, "", url);
+        }
+
+        // Onlayn holati: har 30 soniyada yangilanadi (sahifani qayta yuklash shart emas)
+        var onlineText = document.getElementById("onlineNowText");
+        function pad(n) { return (n < 10 ? "0" : "") + n; }
+        function stamp(d) { return pad(d.getDate()) + "." + pad(d.getMonth() + 1) + "." + d.getFullYear() + " " + pad(d.getHours()) + ":" + pad(d.getMinutes()); }
+        function ago(d) {
+            var min = Math.floor((Date.now() - d.getTime()) / 60000);
+            if (min < 1) return I18n.t("pres.justNow");
+            if (min < 60) return I18n.t("pres.minAgo", { n: min });
+            var h = Math.floor(min / 60);
+            if (h < 24) return I18n.t("pres.hourAgo", { n: h });
+            return I18n.t("pres.dayAgo", { n: Math.floor(h / 24) });
+        }
+        function paintRow(tr) {
+            var online = tr.dataset.online === "1";
+            var dot = tr.querySelector("[data-pdot]");
+            if (dot) dot.classList.toggle("on", online);
+            tr.dataset.tags = (" " + tr.dataset.tags + " ").replace(/ (online|offline) /g, " ").trim() + (online ? " online" : " offline");
+            var cell = tr.querySelector("[data-seen-cell]");
+            if (!cell) return;
+            cell.textContent = "";
+            if (online) {
+                var b = document.createElement("span");
+                b.className = "us-pres on";
+                b.textContent = I18n.t("pres.online");
+                cell.appendChild(b);
+            } else if (tr.dataset.seen) {
+                var d = new Date(tr.dataset.seen);
+                cell.appendChild(document.createTextNode(ago(d)));
+                var sm = document.createElement("small");
+                sm.textContent = stamp(d);
+                cell.appendChild(sm);
+            } else {
+                var n = document.createElement("span");
+                n.className = "us-muted";
+                n.textContent = I18n.t("pres.never");
+                cell.appendChild(n);
+            }
+        }
+        function paintAll() {
+            var count = 0;
+            rows.forEach(function (tr) {
+                paintRow(tr);
+                if (tr.dataset.online === "1" && tr.dataset.role === "user") count++;
+            });
+            onlineText.setAttribute("data-i18n-args", JSON.stringify({ n: count }));
+            onlineText.textContent = I18n.t("pres.onlineNow", { n: count });
+        }
+        function refreshPresence() {
+            fetch("/Users/Presence", { credentials: "same-origin", cache: "no-store", headers: { "Accept": "application/json" } })
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (list) {
+                    if (!list) return;
+                    var byId = {};
+                    list.forEach(function (x) { byId[x.id] = x; });
+                    rows.forEach(function (tr) {
+                        var x = byId[tr.dataset.uid];
+                        if (!x) return;
+                        tr.dataset.online = x.online ? "1" : "0";
+                        tr.dataset.seen = x.seen || "";
+                    });
+                    paintAll();
+                    apply();
+                })
+                .catch(function () { });
+        }
+        paintAll();
+        setInterval(refreshPresence, 30000);
+        document.addEventListener("i18n:change", paintAll);
+
+        search.addEventListener("input", apply);
+        statusSel.addEventListener("change", apply);
+        roleSel.addEventListener("change", apply);
+        // "/" tugmasi — qidiruvga o'tish
+        document.addEventListener("keydown", function (e) {
+            var tag = document.activeElement ? document.activeElement.tagName : "";
+            if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(tag)) { e.preventDefault(); search.focus(); }
+        });
+        apply();
+    })();
+</script>

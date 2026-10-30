@@ -1,0 +1,23 @@
+@* Til lug'ati + i18n.js — <head> ichida, sahifa skriptlaridan oldin ulanadi *@
+@* Brauzer tabidagi ikonka — barcha sahifalarda (test sahifalari ham) bir xil logotip *@
+<link rel="icon" type="image/png" href="~/images/favicon.png" asp-append-version="true" />
+<link rel="apple-touch-icon" href="~/images/favicon.png" />
+<script src="/Lang/Texts?v=@Texts.Version"></script>
+<script src="~/js/i18n.js" asp-append-version="true"></script>
+
+@* Onlayn holati: ochiq sahifa (tab ko'rinib turganda) har daqiqada ping yuboradi — admin o'quvchini "onlayn" ko'radi *@
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <script>
+        (function () {
+            function ping() {
+                if (document.visibilityState !== "visible") return;
+                fetch("/Presence/Ping", { credentials: "same-origin", cache: "no-store" }).catch(function () { });
+            }
+            setInterval(ping, 60000);
+            document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") ping(); });
+        })();
+    </script>
+}
+
+@* Test natijalari endi test sahifasining o'zi (nova-test.js) tomonidan saqlanadi *@

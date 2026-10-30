@@ -1,0 +1,68 @@
+﻿@model string[]
+@{
+    ViewData["TitleKey"] = "topics.pageTitle";
+    ViewData["Title"] = L["topics.pageTitle"];
+    var counts = ViewBag.Counts as Dictionary<string, int> ?? new Dictionary<string, int>();
+    var progress = ViewBag.Progress as Dictionary<string, RefProgress> ?? new();
+    int n = 0;
+}
+
+<div class="ca-page-head">
+    <div>
+        <div class="ca-eyebrow" data-i18n="topics.eyebrow">@L["topics.eyebrow"]</div>
+        <h1 class="ca-h1" data-i18n="topics.pageTitle">@L["topics.pageTitle"]</h1>
+        <p class="ca-sub" data-i18n="topics.sub">@L["topics.sub"]</p>
+    </div>
+    <label class="ca-search">
+        @Icons.Search
+        <input type="search" id="tpFilter" placeholder="@L["nv.topicFilter"]" data-i18n-placeholder="nv.topicFilter" data-search-focus />
+    </label>
+</div>
+
+<div class="nv-topics" id="tpList">
+    @foreach (var t in Model)
+    {
+        n++;
+        var c = counts.TryGetValue(t, out var v) ? v : 0;
+        progress.TryGetValue(t, out var p);
+        var best = p == null ? 0 : (int)Math.Round(p.BestPercent);
+        <a class="nv-topic @(c == 0 ? "empty" : "")" asp-controller="Topic" asp-action="Test" asp-route-topic="@t"
+           data-name="@($"{Topics.Display(t, Lang.Uz)} {Topics.Display(t, Lang.Ru)} {t}".ToLowerInvariant())">
+            <span class="nv-topic-n">@n</span>
+            <span style="min-width:0;">
+                <span class="nv-topic-name" data-i18n-pick data-uz="@Topics.Display(t, Lang.Uz)" data-ru="@Topics.Display(t, Lang.Ru)" data-uzk="@t">@L.Topic(t)</span>
+                <span class="nv-topic-meta">
+                    <span data-i18n="topics.count" data-i18n-args='{"n":@c}'>@L.F("topics.count", ("n", c))</span>
+                    @if (p != null)
+                    {
+                        <span class="ca-bar @Score.BarClass(best)"><i data-w="@best"></i></span>
+                        <b style="color:@Score.Color(best)">@best%</b>
+                    }
+                </span>
+            </span>
+            <span class="nv-go">@Icons.ArrowRight</span>
+        </a>
+    }
+</div>
+<div class="ca-card ca-empty" id="tpEmpty" hidden>
+    <div class="ca-empty-icon">@Icons.Search</div>
+    <h3 data-i18n="sq.emptyTitle">@L["sq.emptyTitle"]</h3>
+</div>
+
+@section Scripts {
+<script>
+    (function () {
+        var input = document.getElementById("tpFilter"), items = document.querySelectorAll("#tpList .nv-topic"), empty = document.getElementById("tpEmpty");
+        input.addEventListener("input", function () {
+            var q = input.value.trim().toLowerCase(), qc = I18n.toCyrillic ? I18n.toCyrillic(q).toLowerCase() : q, shown = 0;
+            items.forEach(function (a) {
+                var name = a.getAttribute("data-name");
+                var ok = !q || name.indexOf(q) >= 0 || name.indexOf(qc) >= 0;
+                a.hidden = !ok;
+                if (ok) shown++;
+            });
+            empty.hidden = shown > 0;
+        });
+    })();
+</script>
+}
